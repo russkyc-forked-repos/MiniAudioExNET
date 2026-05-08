@@ -480,6 +480,13 @@ namespace MiniAudioEx.Native
         left
     }
 
+    //hpf_node
+    //bpf_node
+    //notch_node
+    //peak_node
+    //loshelf_node
+    //hishelf_node
+
     public enum ma_allocation_type
     {
         async_notification,
@@ -487,6 +494,7 @@ namespace MiniAudioEx.Native
         biquad,
         bpf,
         bpf2,
+        bpf_node,
         channel,
         context,
         data_source,
@@ -508,14 +516,18 @@ namespace MiniAudioEx.Native
         fence,
         gainer,
         hishelf2,
+        hishelf_node,
         hpf,
         hpf1,
         hpf2,
+        hpf_node,
         log,
         loshelf2,
+        loshelf_node,
         lpf,
         lpf1,
         lpf2,
+        lpf_node,
         node,
         node_base,
         node_graph,
@@ -523,8 +535,10 @@ namespace MiniAudioEx.Native
         node_output_bus,
         node_vtable,
         notch2,
+        notch_node,
         panner,
         peak2,
+        peak_node,
         procedural_data_source,
         resampling_backend_vtable,
         resource_manager,
@@ -1821,6 +1835,244 @@ namespace MiniAudioEx.Native
         public ma_hishelf2* Get()
 		{
 			return (ma_hishelf2*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_lpf_node_ptr
+	{
+		public IntPtr pointer;
+		public ma_lpf_node_ptr() { }
+		public ma_lpf_node_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_lpf_node_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.lpf_node);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_lpf_node* Get()
+		{
+			return (ma_lpf_node*)pointer;
+		}
+	}
+
+    [StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_hpf_node_ptr
+	{
+		public IntPtr pointer;
+		public ma_hpf_node_ptr() { }
+		public ma_hpf_node_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_hpf_node_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.hpf_node);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_hpf_node* Get()
+		{
+			return (ma_hpf_node*)pointer;
+		}
+	}
+
+    [StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_bpf_node_ptr
+	{
+		public IntPtr pointer;
+		public ma_bpf_node_ptr() { }
+		public ma_bpf_node_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_bpf_node_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.bpf_node);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_bpf_node* Get()
+		{
+			return (ma_bpf_node*)pointer;
+		}
+	}
+
+    [StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_notch_node_ptr
+	{
+		public IntPtr pointer;
+		public ma_notch_node_ptr() { }
+		public ma_notch_node_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_notch_node_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.notch_node);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_notch_node* Get()
+		{
+			return (ma_notch_node*)pointer;
+		}
+	}
+
+    [StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_peak_node_ptr
+	{
+		public IntPtr pointer;
+		public ma_peak_node_ptr() { }
+		public ma_peak_node_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_peak_node_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.peak_node);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_peak_node* Get()
+		{
+			return (ma_peak_node*)pointer;
+		}
+	}
+
+    [StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_loshelf_node_ptr
+	{
+		public IntPtr pointer;
+		public ma_loshelf_node_ptr() { }
+		public ma_loshelf_node_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_loshelf_node_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.loshelf_node);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_loshelf_node* Get()
+		{
+			return (ma_loshelf_node*)pointer;
+		}
+	}
+
+    [StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_hishelf_node_ptr
+	{
+		public IntPtr pointer;
+		public ma_hishelf_node_ptr() { }
+		public ma_hishelf_node_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_hishelf_node_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.hishelf_node);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_hishelf_node* Get()
+		{
+			return (ma_hishelf_node*)pointer;
 		}
 	}
 
@@ -4219,6 +4471,104 @@ namespace MiniAudioEx.Native
     public unsafe struct ma_hishelf2
     {
         public ma_biquad bq;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_lpf_node_config
+    {
+        public ma_node_config nodeConfig;
+        public ma_lpf_config lpf;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ma_lpf_node
+    {
+        public ma_node_base baseNode;
+        public ma_lpf lpf;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_hpf_node_config
+    {
+        public ma_node_config nodeConfig;
+        public ma_hpf_config hpf;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_hpf_node
+    {
+        public ma_node_base baseNode;
+        public ma_hpf hpf;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_bpf_node_config
+    {
+        public ma_node_config nodeConfig;
+        public ma_bpf_config bpf;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_bpf_node
+    {
+        public ma_node_base baseNode;
+        public ma_bpf bpf;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_notch_node_config
+    {
+        public ma_node_config nodeConfig;
+        public ma_notch_config notch;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_notch_node
+    {
+        public ma_node_base baseNode;
+        public ma_notch2 notch;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_peak_node_config
+    {
+        public ma_node_config nodeConfig;
+        public ma_peak_config peak;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_peak_node
+    {
+        public ma_node_base baseNode;
+        public ma_peak2 peak;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_loshelf_node_config
+    {
+        public ma_node_config nodeConfig;
+        public ma_loshelf_config loshelf;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_loshelf_node
+    {
+        public ma_node_base baseNode;
+        public ma_loshelf2 loshelf;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_hishelf_node_config
+    {
+        public ma_node_config nodeConfig;
+        public ma_hishelf_config hishelf;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_hishelf_node
+    {
+        public ma_node_base baseNode;
+        public ma_hishelf2 hishelf;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -7085,6 +7435,356 @@ namespace MiniAudioEx.Native
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
         public static extern UInt32 ma_hishelf2_get_latency(ma_hishelf2_ptr pFilter);
 
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_lpf_node_config ma_lpf_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double cutoffFrequency, ma_uint32 order);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_lpf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_lpf_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_lpf_node_ptr pNode);
+
+        public static ma_result ma_lpf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_lpf_node_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_lpf_node_ptr pNode)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_lpf_node_init(pNodeGraph, ref pConfig, pCallbacks, pNode);
+                }
+            }
+        }
+
+        public static ma_result ma_lpf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_lpf_node_config pConfig, ma_lpf_node_ptr pNode)
+        {
+            unsafe
+            {
+                return ma_lpf_node_init(pNodeGraph, ref pConfig, null, pNode);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf_node_reinit(ref ma_lpf_config pConfig, ma_lpf_node_ptr pNode);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_lpf_node_uninit(ma_lpf_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_lpf_node_uninit(ma_lpf_node_ptr pNode, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_lpf_node_uninit(pNode, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_lpf_node_uninit(ma_lpf_node_ptr pNode)
+        {
+            unsafe
+            {
+                ma_lpf_node_uninit(pNode, null);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_hpf_node_config ma_hpf_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double cutoffFrequency, ma_uint32 order);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_hpf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_hpf_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hpf_node_ptr pNode);
+
+        public static ma_result ma_hpf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_hpf_node_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_hpf_node_ptr pNode)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_hpf_node_init(pNodeGraph, ref pConfig, pCallbacks, pNode);
+                }
+            }
+        }
+
+        public static ma_result ma_hpf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_hpf_node_config pConfig, ma_hpf_node_ptr pNode)
+        {
+            unsafe
+            {
+                return ma_hpf_node_init(pNodeGraph, ref pConfig, null, pNode);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hpf_node_reinit(ref ma_hpf_config pConfig, ma_hpf_node_ptr pNode);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_hpf_node_uninit(ma_hpf_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_hpf_node_uninit(ma_hpf_node_ptr pNode, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_hpf_node_uninit(pNode, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_hpf_node_uninit(ma_hpf_node_ptr pNode)
+        {
+            unsafe
+            {
+                ma_hpf_node_uninit(pNode, null);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_bpf_node_config ma_bpf_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double cutoffFrequency, ma_uint32 order);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_bpf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_bpf_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_bpf_node_ptr pNode);
+
+        public static ma_result ma_bpf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_bpf_node_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_bpf_node_ptr pNode)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_bpf_node_init(pNodeGraph, ref pConfig, pCallbacks, pNode);
+                }
+            }
+        }
+
+        public static ma_result ma_bpf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_bpf_node_config pConfig, ma_bpf_node_ptr pNode)
+        {
+            unsafe
+            {
+                return ma_bpf_node_init(pNodeGraph, ref pConfig, null, pNode);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_bpf_node_reinit(ref ma_bpf_config pConfig, ma_bpf_node_ptr pNode);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_bpf_node_uninit(ma_bpf_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_bpf_node_uninit(ma_bpf_node_ptr pNode, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_bpf_node_uninit(pNode, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_bpf_node_uninit(ma_bpf_node_ptr pNode)
+        {
+            unsafe
+            {
+                ma_bpf_node_uninit(pNode, null);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_notch_node_config ma_notch_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double q, double frequency);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_notch_node_init(ma_node_graph_ptr pNodeGraph, ref ma_notch_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_notch_node_ptr pNode);
+
+        public static ma_result ma_notch_node_init(ma_node_graph_ptr pNodeGraph, ref ma_notch_node_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_notch_node_ptr pNode)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_notch_node_init(pNodeGraph, ref pConfig, pCallbacks, pNode);
+                }
+            }
+        }
+
+        public static ma_result ma_notch_node_init(ma_node_graph_ptr pNodeGraph, ref ma_notch_node_config pConfig, ma_notch_node_ptr pNode)
+        {
+            unsafe
+            {
+                return ma_notch_node_init(pNodeGraph, ref pConfig, null, pNode);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_notch_node_reinit(ref ma_notch_config pConfig, ma_notch_node_ptr pNode);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_notch_node_uninit(ma_notch_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_notch_node_uninit(ma_notch_node_ptr pNode, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_notch_node_uninit(pNode, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_notch_node_uninit(ma_notch_node_ptr pNode)
+        {
+            unsafe
+            {
+                ma_notch_node_uninit(pNode, null);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_peak_node_config ma_peak_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double gainDB, double q, double frequency);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_peak_node_init(ma_node_graph_ptr pNodeGraph, ref ma_peak_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_peak_node_ptr pNode);
+
+        public static ma_result ma_peak_node_init(ma_node_graph_ptr pNodeGraph, ref ma_peak_node_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_peak_node_ptr pNode)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_peak_node_init(pNodeGraph, ref pConfig, pCallbacks, pNode);
+                }
+            }
+        }
+
+        public static ma_result ma_peak_node_init(ma_node_graph_ptr pNodeGraph, ref ma_peak_node_config pConfig, ma_peak_node_ptr pNode)
+        {
+            unsafe
+            {
+                return ma_peak_node_init(pNodeGraph, ref pConfig, null, pNode);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_peak_node_reinit(ref ma_peak_config pConfig, ma_peak_node_ptr pNode);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_peak_node_uninit(ma_peak_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_peak_node_uninit(ma_peak_node_ptr pNode, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_peak_node_uninit(pNode, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_peak_node_uninit(ma_peak_node_ptr pNode)
+        {
+            unsafe
+            {
+                ma_peak_node_uninit(pNode, null);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_loshelf_node_config ma_loshelf_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double gainDB, double q, double frequency);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_loshelf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_loshelf_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_loshelf_node_ptr pNode);
+
+        public static ma_result ma_loshelf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_loshelf_node_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_loshelf_node_ptr pNode)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_loshelf_node_init(pNodeGraph, ref pConfig, pCallbacks, pNode);
+                }
+            }
+        }
+
+        public static ma_result ma_loshelf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_loshelf_node_config pConfig, ma_loshelf_node_ptr pNode)
+        {
+            unsafe
+            {
+                return ma_loshelf_node_init(pNodeGraph, ref pConfig, null, pNode);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_loshelf_node_reinit(ref ma_loshelf_config pConfig, ma_loshelf_node_ptr pNode);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_loshelf_node_uninit(ma_loshelf_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_loshelf_node_uninit(ma_loshelf_node_ptr pNode, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_loshelf_node_uninit(pNode, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_loshelf_node_uninit(ma_loshelf_node_ptr pNode)
+        {
+            unsafe
+            {
+                ma_loshelf_node_uninit(pNode, null);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_hishelf_node_config ma_hishelf_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double gainDB, double q, double frequency);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_hishelf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_hishelf_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hishelf_node_ptr pNode);
+
+        public static ma_result ma_hishelf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_hishelf_node_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_hishelf_node_ptr pNode)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_hishelf_node_init(pNodeGraph, ref pConfig, pCallbacks, pNode);
+                }
+            }
+        }
+
+        public static ma_result ma_hishelf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_hishelf_node_config pConfig, ma_hishelf_node_ptr pNode)
+        {
+            unsafe
+            {
+                return ma_hishelf_node_init(pNodeGraph, ref pConfig, null, pNode);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hishelf_node_reinit(ref ma_hishelf_config pConfig, ma_hishelf_node_ptr pNode);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_hishelf_node_uninit(ma_hishelf_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_hishelf_node_uninit(ma_hishelf_node_ptr pNode, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_hishelf_node_uninit(pNode, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_hishelf_node_uninit(ma_hishelf_node_ptr pNode)
+        {
+            unsafe
+            {
+                ma_hishelf_node_uninit(pNode, null);
+            }
+        }
+
         //ma_delay
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
         public static extern ma_delay_config ma_delay_config_init(ma_uint32 channels, ma_uint32 sampleRate, ma_uint32 delayInFrames, float decay);
@@ -7153,7 +7853,6 @@ namespace MiniAudioEx.Native
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
         public static extern float ma_delay_get_decay(ma_delay_ptr pDelay);
-
 
         //ma_delay_node
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
