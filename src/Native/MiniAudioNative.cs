@@ -494,6 +494,8 @@ namespace MiniAudioEx.Native
         data_source_vtable,
         decoder,
         decoding_backend_vtable,
+        delay,
+        delay_node,
         device,
         device_id,
         device_notification,
@@ -532,6 +534,7 @@ namespace MiniAudioEx.Native
         sound_group,
         spatializer,
         spatializer_listener,
+        splitter_node,
         stack,
         vfs
     }
@@ -1818,6 +1821,108 @@ namespace MiniAudioEx.Native
         public ma_hishelf2* Get()
 		{
 			return (ma_hishelf2*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_delay_ptr
+	{
+		public IntPtr pointer;
+		public ma_delay_ptr() { }
+		public ma_delay_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_delay_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.delay);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_delay* Get()
+		{
+			return (ma_delay*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_delay_node_ptr
+	{
+		public IntPtr pointer;
+		public ma_delay_node_ptr() { }
+		public ma_delay_node_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_delay_node_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.delay_node);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_delay_node* Get()
+		{
+			return (ma_delay_node*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_splitter_node_ptr
+	{
+		public IntPtr pointer;
+		public ma_splitter_node_ptr() { }
+		public ma_splitter_node_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_splitter_node_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.splitter_node);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_splitter_node* Get()
+		{
+			return (ma_splitter_node*)pointer;
 		}
 	}
 
@@ -4114,6 +4219,55 @@ namespace MiniAudioEx.Native
     public unsafe struct ma_hishelf2
     {
         public ma_biquad bq;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_delay_config
+    {
+        public ma_uint32 channels;
+        public ma_uint32 sampleRate;
+        public ma_uint32 delayInFrames;
+        public ma_bool32 delayStart;       /* Set to true to delay the start of the output; false otherwise. */
+        public float wet;                  /* 0..1. Default = 1. */
+        public float dry;                  /* 0..1. Default = 1. */
+        public float decay;                /* 0..1. Default = 0 (no feedback). Feedback decay. Use this for echo. */
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_delay
+    {
+        public ma_delay_config config;
+        public ma_uint32 cursor;               /* Feedback is written to this cursor. Always equal or in front of the read cursor. */
+        public ma_uint32 bufferSizeInFrames;
+        public IntPtr pBuffer;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_delay_node_config
+    {
+        public ma_node_config nodeConfig;
+        public ma_delay_config delay;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_delay_node
+    {
+        public ma_node_base baseNode;
+        public ma_delay delay;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_splitter_node_config
+    {
+        public ma_node_config nodeConfig;
+        public ma_uint32 channels;
+        public ma_uint32 outputBusCount;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_splitter_node
+    {
+        public ma_node_base baseNode;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -6930,6 +7084,190 @@ namespace MiniAudioEx.Native
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
         public static extern UInt32 ma_hishelf2_get_latency(ma_hishelf2_ptr pFilter);
+
+        //ma_delay
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_delay_config ma_delay_config_init(ma_uint32 channels, ma_uint32 sampleRate, ma_uint32 delayInFrames, float decay);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_delay_init(ref ma_delay_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_delay_ptr pDelay);
+
+        public static ma_result ma_delay_init(ref ma_delay_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_delay_ptr pDelay)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_delay_init(ref pConfig, pCallbacks, pDelay);
+                }
+            }
+        }
+
+        public static ma_result ma_delay_init(ref ma_delay_config pConfig, ma_delay_ptr pDelay)
+        {
+            unsafe
+            {
+                return ma_delay_init(ref pConfig, null, pDelay);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_delay_uninit(ma_delay_ptr pDelay, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_delay_uninit(ma_delay_ptr pDelay, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_delay_uninit(pDelay, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_delay_uninit(ma_delay_ptr pDelay)
+        {
+            unsafe
+            {
+                ma_delay_uninit(pDelay, null);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_delay_process_pcm_frames(ma_delay_ptr pDelay, IntPtr pFramesOut, IntPtr pFramesIn, UInt32 frameCount);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ma_delay_set_wet(ma_delay_ptr pDelay, float value);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern float ma_delay_get_wet(ma_delay_ptr pDelay);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ma_delay_set_dry(ma_delay_ptr pDelay, float value);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern float ma_delay_get_dry(ma_delay_ptr pDelay);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ma_delay_set_decay(ma_delay_ptr pDelay, float value);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern float ma_delay_get_decay(ma_delay_ptr pDelay);
+
+
+        //ma_delay_node
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_delay_node_config ma_delay_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, ma_uint32 delayInFrames, float decay);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_delay_node_init(ma_node_graph_ptr pNodeGraph, ref ma_delay_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_delay_node_ptr pDelayNode);
+
+        public static ma_result ma_delay_node_init(ma_node_graph_ptr pNodeGraph, ref ma_delay_node_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_delay_node_ptr pDelayNode)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_delay_node_init(pNodeGraph, ref pConfig, pCallbacks, pDelayNode);
+                }
+            }
+        }
+
+        public static ma_result ma_delay_node_init(ma_node_graph_ptr pNodeGraph, ref ma_delay_node_config pConfig, ma_delay_node_ptr pDelayNode)
+        {
+            unsafe
+            {
+                return ma_delay_node_init(pNodeGraph, ref pConfig, null, pDelayNode);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_delay_node_uninit(ma_delay_node_ptr pDelayNode, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_delay_node_uninit(ma_delay_node_ptr pDelayNode, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_delay_node_uninit(pDelayNode, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_delay_node_uninit(ma_delay_node_ptr pDelayNode)
+        {
+            unsafe
+            {
+                ma_delay_node_uninit(pDelayNode, null);
+            }
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ma_delay_node_set_wet(ma_delay_node_ptr pDelayNode, float value);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern float ma_delay_node_get_wet(ma_delay_node_ptr pDelayNode);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ma_delay_node_set_dry(ma_delay_node_ptr pDelayNode, float value);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern float ma_delay_node_get_dry(ma_delay_node_ptr pDelayNode);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ma_delay_node_set_decay(ma_delay_node_ptr pDelayNode, float value);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern float ma_delay_node_get_decay(ma_delay_node_ptr pDelayNode);
+
+        //ma_splitter_node
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_splitter_node_config ma_splitter_node_config_init(ma_uint32 channels);
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_splitter_node_init(ma_node_graph_ptr pNodeGraph, ref ma_splitter_node_config pConfig, ma_allocation_callbacks *pAllocationCallbacks, ma_splitter_node_ptr pSplitterNode);
+
+        public static ma_result ma_splitter_node_init(ma_node_graph_ptr pNodeGraph, ref ma_splitter_node_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_splitter_node_ptr pSplitterNode)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_splitter_node_init(pNodeGraph, ref pConfig, pCallbacks, pSplitterNode);
+                }
+            }
+        }
+
+        public static ma_result ma_splitter_node_init(ma_node_graph_ptr pNodeGraph, ref ma_splitter_node_config pConfig, ma_splitter_node_ptr pSplitterNode)
+        {
+            unsafe
+            {
+                return ma_splitter_node_init(pNodeGraph, ref pConfig, null, pSplitterNode);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_splitter_node_uninit(ma_splitter_node_ptr pSplitterNode, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_splitter_node_uninit(ma_splitter_node_ptr pSplitterNode, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_splitter_node_uninit(pSplitterNode, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_splitter_node_uninit(ma_splitter_node_ptr pSplitterNode)
+        {
+            unsafe
+            {
+                ma_splitter_node_uninit(pSplitterNode, null);
+            }
+        }
     }
 
     public static class MarshalHelper
