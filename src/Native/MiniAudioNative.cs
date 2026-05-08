@@ -484,6 +484,9 @@ namespace MiniAudioEx.Native
     {
         async_notification,
         biquad_coefficient,
+        biquad,
+        bpf,
+        bpf2,
         channel,
         context,
         data_source,
@@ -502,7 +505,13 @@ namespace MiniAudioEx.Native
         fader,
         fence,
         gainer,
+        hishelf2,
+        hpf,
+        hpf1,
+        hpf2,
         log,
+        loshelf2,
+        lpf,
         lpf1,
         lpf2,
         node,
@@ -511,7 +520,9 @@ namespace MiniAudioEx.Native
         node_input_bus,
         node_output_bus,
         node_vtable,
+        notch2,
         panner,
+        peak2,
         procedural_data_source,
         resampling_backend_vtable,
         resource_manager,
@@ -1369,6 +1380,40 @@ namespace MiniAudioEx.Native
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_lpf_ptr
+	{
+		public IntPtr pointer;
+		public ma_lpf_ptr() { }
+		public ma_lpf_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_lpf_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.lpf);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_lpf* Get()
+		{
+			return (ma_lpf*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct ma_lpf1_ptr
 	{
 		public IntPtr pointer;
@@ -1433,6 +1478,346 @@ namespace MiniAudioEx.Native
         public ma_lpf2* Get()
 		{
 			return (ma_lpf2*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_hpf_ptr
+	{
+		public IntPtr pointer;
+		public ma_hpf_ptr() { }
+		public ma_hpf_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_hpf_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.hpf);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_hpf* Get()
+		{
+			return (ma_hpf*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_hpf1_ptr
+	{
+		public IntPtr pointer;
+		public ma_hpf1_ptr() { }
+		public ma_hpf1_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_hpf1_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.hpf1);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_hpf1* Get()
+		{
+			return (ma_hpf1*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_hpf2_ptr
+	{
+		public IntPtr pointer;
+		public ma_hpf2_ptr() { }
+		public ma_hpf2_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_hpf2_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.hpf2);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_hpf2* Get()
+		{
+			return (ma_hpf2*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_bpf_ptr
+	{
+		public IntPtr pointer;
+		public ma_bpf_ptr() { }
+		public ma_bpf_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_bpf_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.bpf);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_bpf* Get()
+		{
+			return (ma_bpf*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_bpf2_ptr
+	{
+		public IntPtr pointer;
+		public ma_bpf2_ptr() { }
+		public ma_bpf2_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_bpf2_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.bpf2);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_bpf2* Get()
+		{
+			return (ma_bpf2*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_biquad_ptr
+	{
+		public IntPtr pointer;
+		public ma_biquad_ptr() { }
+		public ma_biquad_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_biquad_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.biquad);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_biquad* Get()
+		{
+			return (ma_biquad*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_notch2_ptr
+	{
+		public IntPtr pointer;
+		public ma_notch2_ptr() { }
+		public ma_notch2_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_notch2_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.notch2);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_notch2* Get()
+		{
+			return (ma_notch2*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_peak2_ptr
+	{
+		public IntPtr pointer;
+		public ma_peak2_ptr() { }
+		public ma_peak2_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_peak2_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.peak2);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_peak2* Get()
+		{
+			return (ma_peak2*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_loshelf2_ptr
+	{
+		public IntPtr pointer;
+		public ma_loshelf2_ptr() { }
+		public ma_loshelf2_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_loshelf2_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.loshelf2);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_loshelf2* Get()
+		{
+			return (ma_loshelf2*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_hishelf2_ptr
+	{
+		public IntPtr pointer;
+		public ma_hishelf2_ptr() { }
+		public ma_hishelf2_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_hishelf2_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.hishelf2);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_hishelf2* Get()
+		{
+			return (ma_hishelf2*)pointer;
 		}
 	}
 
@@ -3425,14 +3810,14 @@ namespace MiniAudioEx.Native
         [FieldOffset(0)]
         public float f32;
         [FieldOffset(0)]
-        public ma_int32 s32;
+        public UInt32 s32;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct ma_biquad_config
     {
         public ma_format format;
-        public ma_uint32 channels;
+        public UInt32 channels;
         public double b0;
         public double b1;
         public double b2;
@@ -3445,15 +3830,14 @@ namespace MiniAudioEx.Native
     public unsafe struct ma_biquad
     {
         public ma_format format;
-        public ma_uint32 channels;
+        public UInt32 channels;
         public ma_biquad_coefficient b0;
         public ma_biquad_coefficient b1;
         public ma_biquad_coefficient b2;
         public ma_biquad_coefficient a1;
         public ma_biquad_coefficient a2;
-        public ma_biquad_coefficient_ptr pR1;
-        public ma_biquad_coefficient_ptr pR2;
-        /* Memory management. */
+        public ma_biquad_coefficient* pR1;
+        public ma_biquad_coefficient* pR2;
         public IntPtr _pHeap;
         public ma_bool32 _ownsHeap;
     }
@@ -3462,8 +3846,8 @@ namespace MiniAudioEx.Native
     public unsafe struct ma_lpf1_config
     {
         public ma_format format;
-        public ma_uint32 channels;
-        public ma_uint32 sampleRate;
+        public UInt32 channels;
+        public UInt32 sampleRate;
         public double cutoffFrequency;
         public double q;
     }
@@ -3472,8 +3856,8 @@ namespace MiniAudioEx.Native
     public unsafe struct ma_lpf2_config
     {
         public ma_format format;
-        public ma_uint32 channels;
-        public ma_uint32 sampleRate;
+        public UInt32 channels;
+        public UInt32 sampleRate;
         public double cutoffFrequency;
         public double q;
     }
@@ -3482,9 +3866,9 @@ namespace MiniAudioEx.Native
     public unsafe struct ma_lpf1
     {
         public ma_format format;
-        public ma_uint32 channels;
+        public UInt32 channels;
         public ma_biquad_coefficient a;
-        public ma_biquad_coefficient_ptr pR1;
+        public ma_biquad_coefficient* pR1;
         /* Memory management. */
         public IntPtr _pHeap;
         public ma_bool32 _ownsHeap;
@@ -3497,18 +3881,239 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_lpf_config
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public double cutoffFrequency;
+        public UInt32 order;    /* If set to 0, will be treated as a passthrough (no filtering will be applied). */
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
     public unsafe struct ma_lpf
     {
         public ma_format format;
-        public ma_uint32 channels;
-        public ma_uint32 sampleRate;
-        public ma_uint32 lpf1Count;
-        public ma_uint32 lpf2Count;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public UInt32 lpf1Count;
+        public UInt32 lpf2Count;
         public ma_lpf1_ptr pLPF1;
         public ma_lpf2_ptr pLPF2;
         /* Memory management. */
         public IntPtr _pHeap;
         public ma_bool32 _ownsHeap;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_hpf1_config
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public double cutoffFrequency;
+        public double q;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_hpf2_config
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public double cutoffFrequency;
+        public double q;
+    }
+    
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_hpf1
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public ma_biquad_coefficient a;
+        public ma_biquad_coefficient* pR1;
+        /* Memory management. */
+        public IntPtr _pHeap;
+        public ma_bool32 _ownsHeap;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_hpf2
+    {
+        public ma_biquad bq;   /* The second order high-pass filter is implemented as a biquad filter. */
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_hpf_config
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public double cutoffFrequency;
+        public UInt32 order;    /* If set to 0, will be treated as a passthrough (no filtering will be applied). */
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_hpf
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public UInt32 hpf1Count;
+        public UInt32 hpf2Count;
+        public ma_hpf1_ptr pHPF1;
+        public ma_hpf2_ptr pHPF2;
+        /* Memory management. */
+        public IntPtr _pHeap;
+        public ma_bool32 _ownsHeap;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_bpf2_config
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public double cutoffFrequency;
+        public double q;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_bpf2
+    {
+        public ma_biquad bq;   /* The second order band-pass filter is implemented as a biquad filter. */
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_bpf_config
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public double cutoffFrequency;
+        public UInt32 order;    /* If set to 0, will be treated as a passthrough (no filtering will be applied). */
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_bpf
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 bpf2Count;
+        public ma_bpf2_ptr pBPF2;
+        /* Memory management. */
+        public IntPtr _pHeap;
+        public ma_bool32 _ownsHeap;
+    }
+    
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_notch2_config
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public double q;
+        public double frequency;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_notch_config
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public double q;
+        public double frequency;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_notch2
+    {
+        public ma_biquad bq;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_peak2_config
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public double gainDB;
+        public double q;
+        public double frequency;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_peak_config
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public double gainDB;
+        public double q;
+        public double frequency;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_peak2
+    {
+        public ma_biquad bq;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_loshelf2_config
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public double gainDB;
+        public double shelfSlope;
+        public double frequency;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_loshelf_config
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public double gainDB;
+        public double shelfSlope;
+        public double frequency;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_loshelf2
+    {
+        public ma_biquad bq;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_hishelf2_config
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public double gainDB;
+        public double shelfSlope;
+        public double frequency;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_hishelf_config
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public double gainDB;
+        public double shelfSlope;
+        public double frequency;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_hishelf2
+    {
+        public ma_biquad bq;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -5514,6 +6119,817 @@ namespace MiniAudioEx.Native
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
         public static extern ma_result ma_encoder_write_pcm_frames(ma_encoder_ptr pEncoder, IntPtr pFramesIn, ma_uint64 frameCount, out ma_uint64 pFramesWritten);
+
+        // ma_biquad/filters general
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_biquad_config ma_biquad_config_init(ma_format format, UInt32 channels, double b0, double b1, double b2, double a0, double a1, double a2);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_biquad_get_heap_size(ref ma_biquad_config pConfig, out size_t pHeapSizeInBytes);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_biquad_init_preallocated(ref ma_biquad_config pConfig, IntPtr pHeap, ma_biquad_ptr pBQ);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_biquad_init(ref ma_biquad_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_biquad_ptr pBQ);
+
+        public static ma_result ma_biquad_init(ref ma_biquad_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_biquad_ptr pBQ)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_biquad_init(ref pConfig, pCallbacks, pBQ);
+                }
+            }
+        }
+
+        public static ma_result ma_biquad_init(ref ma_biquad_config pConfig, ma_biquad_ptr pBQ)
+        {
+            unsafe
+            {
+                return ma_biquad_init(ref pConfig, null, pBQ);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_biquad_uninit(ma_biquad_ptr pBQ, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_biquad_uninit(ma_biquad_ptr pBQ, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_biquad_uninit(pBQ, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_biquad_uninit(ma_biquad_ptr pBQ)
+        {
+            unsafe
+            {
+                ma_biquad_uninit(pBQ, null);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_biquad_reinit(ref ma_biquad_config pConfig, ma_biquad_ptr pBQ);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_biquad_clear_cache(ma_biquad_ptr pBQ);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_biquad_process_pcm_frames(ma_biquad_ptr pBQ, IntPtr pFramesOut, IntPtr pFramesIn, UInt64 frameCount);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern UInt32 ma_biquad_get_latency(ma_biquad_ptr pBQ);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_lpf1_config ma_lpf1_config_init(ma_format format, UInt32 channels, UInt32 sampleRate, double cutoffFrequency);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_lpf2_config ma_lpf2_config_init(ma_format format, UInt32 channels, UInt32 sampleRate, double cutoffFrequency, double q);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf1_get_heap_size(ref ma_lpf1_config pConfig, out size_t pHeapSizeInBytes);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf1_init_preallocated(ref ma_lpf1_config pConfig, IntPtr pHeap, ma_lpf1_ptr pLPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_lpf1_init(ref ma_lpf1_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_lpf1_ptr pLPF);
+
+        public static ma_result ma_lpf1_init(ref ma_lpf1_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_lpf1_ptr pLPF)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_lpf1_init(ref pConfig, pCallbacks, pLPF);
+                }
+            }
+        }
+
+        public static ma_result ma_lpf1_init(ref ma_lpf1_config pConfig, ma_lpf1_ptr pLPF)
+        {
+            unsafe
+            {
+                return ma_lpf1_init(ref pConfig, null, pLPF);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_lpf1_uninit(ma_lpf1_ptr pLPF, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_lpf1_uninit(ma_lpf1_ptr pLPF, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_lpf1_uninit(pLPF, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_lpf1_uninit(ma_lpf1_ptr pLPF)
+        {
+            unsafe
+            {
+                ma_lpf1_uninit(pLPF, null);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf1_reinit(ref ma_lpf1_config pConfig, ma_lpf1_ptr pLPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf1_clear_cache(ma_lpf1_ptr pLPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf1_process_pcm_frames(ma_lpf1_ptr pLPF, IntPtr pFramesOut, IntPtr pFramesIn, UInt64 frameCount);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern UInt32 ma_lpf1_get_latency(ma_lpf1_ptr pLPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf2_get_heap_size(ref ma_lpf2_config pConfig, out size_t pHeapSizeInBytes);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf2_init_preallocated(ref ma_lpf2_config pConfig, IntPtr pHeap, ma_lpf2_ptr pHPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_lpf2_init(ref ma_lpf2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_lpf2_ptr pLPF);
+
+        public static ma_result ma_lpf2_init(ref ma_lpf2_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_lpf2_ptr pLPF)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_lpf2_init(ref pConfig, pCallbacks, pLPF);
+                }
+            }
+        }
+
+        public static ma_result ma_lpf2_init(ref ma_lpf2_config pConfig, ma_lpf2_ptr pLPF)
+        {
+            unsafe
+            {
+                return ma_lpf2_init(ref pConfig, null, pLPF);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_lpf2_uninit(ma_lpf2_ptr pLPF, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_lpf2_uninit(ma_lpf2_ptr pLPF, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_lpf2_uninit(pLPF, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_lpf2_uninit(ma_lpf2_ptr pLPF)
+        {
+            unsafe
+            {
+                ma_lpf2_uninit(pLPF, null);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf2_reinit(ref ma_lpf2_config pConfig, ma_lpf2_ptr pLPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf2_clear_cache(ma_lpf2_ptr pLPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf2_process_pcm_frames(ma_lpf2_ptr pLPF, IntPtr pFramesOut, IntPtr pFramesIn, UInt64 frameCount);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern UInt32 ma_lpf2_get_latency(ma_lpf2_ptr pLPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_lpf_config ma_lpf_config_init(ma_format format, UInt32 channels, UInt32 sampleRate, double cutoffFrequency, UInt32 order);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf_get_heap_size(ref ma_lpf_config pConfig, out size_t pHeapSizeInBytes);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf_init_preallocated(ref ma_lpf_config pConfig, IntPtr pHeap, ma_lpf_ptr pLPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_lpf_init(ref ma_lpf_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_lpf_ptr pLPF);
+
+        public static ma_result ma_lpf_init(ref ma_lpf_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_lpf_ptr pLPF)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_lpf_init(ref pConfig, pCallbacks, pLPF);
+                }
+            }
+        }
+
+        public static ma_result ma_lpf_init(ref ma_lpf_config pConfig, ma_lpf_ptr pLPF)
+        {
+            unsafe
+            {
+                return ma_lpf_init(ref pConfig, null, pLPF);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_lpf_uninit(ma_lpf_ptr pLPF, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_lpf_uninit(ma_lpf_ptr pLPF, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_lpf_uninit(pLPF, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_lpf_uninit(ma_lpf_ptr pLPF)
+        {
+            unsafe
+            {
+                ma_lpf_uninit(pLPF, null);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf_reinit(ref ma_lpf_config pConfig, ma_lpf_ptr pLPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf_clear_cache(ma_lpf_ptr pLPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_lpf_process_pcm_frames(ma_lpf_ptr pLPF, IntPtr pFramesOut, IntPtr pFramesIn, UInt64 frameCount);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern UInt32 ma_lpf_get_latency(ma_lpf_ptr pLPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_hpf1_config ma_hpf1_config_init(ma_format format, UInt32 channels, UInt32 sampleRate, double cutoffFrequency);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_hpf2_config ma_hpf2_config_init(ma_format format, UInt32 channels, UInt32 sampleRate, double cutoffFrequency, double q);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hpf1_get_heap_size(ref ma_hpf1_config pConfig, out size_t pHeapSizeInBytes);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hpf1_init_preallocated(ref ma_hpf1_config pConfig, IntPtr pHeap, ma_hpf1_ptr pLPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_hpf1_init(ref ma_hpf1_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hpf1_ptr pHPF);
+
+        public static ma_result ma_hpf1_init(ref ma_hpf1_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_hpf1_ptr pHPF)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_hpf1_init(ref pConfig, pCallbacks, pHPF);
+                }
+            }
+        }
+
+        public static ma_result ma_hpf1_init(ref ma_hpf1_config pConfig, ma_hpf1_ptr pHPF)
+        {
+            unsafe
+            {
+                return ma_hpf1_init(ref pConfig, null, pHPF);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_hpf1_uninit(ma_hpf1_ptr pHPF, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_hpf1_uninit(ma_hpf1_ptr pHPF, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_hpf1_uninit(pHPF, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_hpf1_uninit(ma_hpf1_ptr pHPF)
+        {
+            unsafe
+            {
+                ma_hpf1_uninit(pHPF, null);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hpf1_reinit(ref ma_hpf1_config pConfig, ma_hpf1_ptr pHPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hpf1_process_pcm_frames(ma_hpf1_ptr pHPF, IntPtr pFramesOut, IntPtr pFramesIn, UInt64 frameCount);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern UInt32 ma_hpf1_get_latency(ma_hpf1_ptr pHPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hpf2_get_heap_size(ref ma_hpf2_config pConfig, out size_t pHeapSizeInBytes);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hpf2_init_preallocated(ref ma_hpf2_config pConfig, IntPtr pHeap, ma_hpf2_ptr pHPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_hpf2_init(ref ma_hpf2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hpf2_ptr pHPF);
+
+        public static ma_result ma_hpf2_init(ref ma_hpf2_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_hpf2_ptr pHPF)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_hpf2_init(ref pConfig, pCallbacks, pHPF);
+                }
+            }
+        }
+
+        public static ma_result ma_hpf2_init(ref ma_hpf2_config pConfig, ma_hpf2_ptr pHPF)
+        {
+            unsafe
+            {
+                return ma_hpf2_init(ref pConfig, null, pHPF);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_hpf2_uninit(ma_hpf2_ptr pHPF, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_hpf2_uninit(ma_hpf2_ptr pHPF, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_hpf2_uninit(pHPF, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_hpf2_uninit(ma_hpf2_ptr pHPF)
+        {
+            unsafe
+            {
+                ma_hpf2_uninit(pHPF, null);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hpf2_reinit(ref ma_hpf2_config pConfig, ma_hpf2_ptr pHPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hpf2_process_pcm_frames(ma_hpf2_ptr pHPF, IntPtr pFramesOut, IntPtr pFramesIn, UInt64 frameCount);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern UInt32 ma_hpf2_get_latency(ma_hpf2_ptr pHPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_hpf_config ma_hpf_config_init(ma_format format, UInt32 channels, UInt32 sampleRate, double cutoffFrequency, UInt32 order);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hpf_get_heap_size(ref ma_hpf_config pConfig, out size_t pHeapSizeInBytes);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hpf_init_preallocated(ref ma_hpf_config pConfig, IntPtr pHeap, ma_hpf_ptr pLPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_hpf_init(ref ma_hpf_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hpf_ptr pHPF);
+
+        public static ma_result ma_hpf_init(ref ma_hpf_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_hpf_ptr pHPF)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_hpf_init(ref pConfig, pCallbacks, pHPF);
+                }
+            }
+        }
+
+        public static ma_result ma_hpf_init(ref ma_hpf_config pConfig, ma_hpf_ptr pHPF)
+        {
+            unsafe
+            {
+                return ma_hpf_init(ref pConfig, null, pHPF);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_hpf_uninit(ma_hpf_ptr pHPF, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_hpf_uninit(ma_hpf_ptr pHPF, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_hpf_uninit(pHPF, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_hpf_uninit(ma_hpf_ptr pHPF)
+        {
+            unsafe
+            {
+                ma_hpf_uninit(pHPF, null);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hpf_reinit(ref ma_hpf_config pConfig, ma_hpf_ptr pHPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hpf_process_pcm_frames(ma_hpf_ptr pHPF, IntPtr pFramesOut, IntPtr pFramesIn, UInt64 frameCount);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern UInt32 ma_hpf_get_latency(ma_hpf_ptr pHPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_bpf2_config ma_bpf2_config_init(ma_format format, UInt32 channels, UInt32 sampleRate, double cutoffFrequency, double q);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_bpf2_get_heap_size(ref ma_bpf2_config pConfig, out size_t pHeapSizeInBytes);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_bpf2_init_preallocated(ref ma_bpf2_config pConfig, IntPtr pHeap, ma_bpf2_ptr pBPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_bpf2_init(ref ma_bpf2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_bpf2_ptr pBPF);
+
+        public static ma_result ma_bpf2_init(ref ma_bpf2_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_bpf2_ptr pBPF)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_bpf2_init(ref pConfig, pCallbacks, pBPF);
+                }
+            }
+        }
+
+        public static ma_result ma_bpf2_init(ref ma_bpf2_config pConfig, ma_bpf2_ptr pBPF)
+        {
+            unsafe
+            {
+                return ma_bpf2_init(ref pConfig, null, pBPF);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_bpf2_uninit(ma_bpf2_ptr pBPF, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_bpf2_uninit(ma_bpf2_ptr pBPF, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_bpf2_uninit(pBPF, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_bpf2_uninit(ma_bpf2_ptr pBPF)
+        {
+            unsafe
+            {
+                ma_bpf2_uninit(pBPF, null);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_bpf2_reinit(ref ma_bpf2_config pConfig, ma_bpf2_ptr pBPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_bpf2_process_pcm_frames(ma_bpf2_ptr pBPF, IntPtr pFramesOut, IntPtr pFramesIn, UInt64 frameCount);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern UInt32 ma_bpf2_get_latency(ma_bpf2_ptr pBPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_bpf_config ma_bpf_config_init(ma_format format, UInt32 channels, UInt32 sampleRate, double cutoffFrequency, UInt32 order);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_bpf_get_heap_size(ref ma_bpf_config pConfig, out size_t pHeapSizeInBytes);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_bpf_init_preallocated(ref ma_bpf_config pConfig, IntPtr pHeap, ma_bpf_ptr pBPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_bpf_init(ref ma_bpf_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_bpf_ptr pBPF);
+
+        public static ma_result ma_bpf_init(ref ma_bpf_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_bpf_ptr pBPF)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_bpf_init(ref pConfig, pCallbacks, pBPF);
+                }
+            }
+        }
+
+        public static ma_result ma_bpf_init(ref ma_bpf_config pConfig, ma_bpf_ptr pBPF)
+        {
+            unsafe
+            {
+                return ma_bpf_init(ref pConfig, null, pBPF);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_bpf_uninit(ma_bpf_ptr pBPF, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_bpf_uninit(ma_bpf_ptr pBPF, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_bpf_uninit(pBPF, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_bpf_uninit(ma_bpf_ptr pBPF)
+        {
+            unsafe
+            {
+                ma_bpf_uninit(pBPF, null);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_bpf_reinit(ref ma_bpf_config pConfig, ma_bpf_ptr pBPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_bpf_process_pcm_frames(ma_bpf_ptr pBPF, IntPtr pFramesOut, IntPtr pFramesIn, UInt64 frameCount);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern UInt32 ma_bpf_get_latency(ma_bpf_ptr pBPF);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_notch2_config ma_notch2_config_init(ma_format format, UInt32 channels, UInt32 sampleRate, double q, double frequency);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_notch2_get_heap_size(ref ma_notch2_config pConfig, out size_t pHeapSizeInBytes);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe ma_result ma_notch2_init_preallocated(ref ma_notch2_config pConfig, IntPtr pHeap, ma_notch2_ptr pFilter);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_notch2_init(ref ma_notch2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_notch2_ptr pFilter);
+
+        public static ma_result ma_notch2_init(ref ma_notch2_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_notch2_ptr pFilter)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_notch2_init(ref pConfig, pCallbacks, pFilter);
+                }
+            }
+        }
+
+        public static ma_result ma_notch2_init(ref ma_notch2_config pConfig, ma_notch2_ptr pFilter)
+        {
+            unsafe
+            {
+                return ma_notch2_init(ref pConfig, null, pFilter);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_notch2_uninit(ma_notch2_ptr pFilter, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_notch2_uninit(ma_notch2_ptr pFilter, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_notch2_uninit(pFilter, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_notch2_uninit(ma_notch2_ptr pFilter)
+        {
+            unsafe
+            {
+                ma_notch2_uninit(pFilter, null);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_notch2_reinit(ref ma_notch2_config pConfig, ma_notch2_ptr pFilter);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_notch2_process_pcm_frames(ma_notch2_ptr pFilter, IntPtr pFramesOut, IntPtr pFramesIn, UInt64 frameCount);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern UInt32 ma_notch2_get_latency(ma_notch2_ptr pFilter);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_peak2_config ma_peak2_config_init(ma_format format, UInt32 channels, UInt32 sampleRate, double gainDB, double q, double frequency);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_peak2_get_heap_size(ref ma_peak2_config pConfig, out size_t pHeapSizeInBytes);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_peak2_init_preallocated(ref ma_peak2_config pConfig, IntPtr pHeap, ma_peak2_ptr pFilter);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_peak2_init(ref ma_peak2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_peak2_ptr pFilter);
+
+        public static ma_result ma_peak2_init(ref ma_peak2_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_peak2_ptr pFilter)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_peak2_init(ref pConfig, pCallbacks, pFilter);
+                }
+            }
+        }
+
+        public static ma_result ma_peak2_init(ref ma_peak2_config pConfig, ma_peak2_ptr pFilter)
+        {
+            unsafe
+            {
+                return ma_peak2_init(ref pConfig, null, pFilter);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_peak2_uninit(ma_peak2_ptr pFilter, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_peak2_uninit(ma_peak2_ptr pFilter, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_peak2_uninit(pFilter, pCallbacks);
+                }
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_peak2_reinit(ref ma_peak2_config pConfig, ma_peak2_ptr pFilter);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_peak2_process_pcm_frames(ma_peak2_ptr pFilter, IntPtr pFramesOut, IntPtr pFramesIn, UInt64 frameCount);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern UInt32 ma_peak2_get_latency(ma_peak2_ptr pFilter);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_loshelf2_config ma_loshelf2_config_init(ma_format format, UInt32 channels, UInt32 sampleRate, double gainDB, double shelfSlope, double frequency);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_loshelf2_get_heap_size(ref ma_loshelf2_config pConfig, out size_t pHeapSizeInBytes);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_loshelf2_init_preallocated(ref ma_loshelf2_config pConfig, IntPtr pHeap, ma_loshelf2_ptr pFilter);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_loshelf2_init(ref ma_loshelf2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_loshelf2_ptr pFilter);
+
+        public static ma_result ma_loshelf2_init(ref ma_loshelf2_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_loshelf2_ptr pFilter)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_loshelf2_init(ref pConfig, pCallbacks, pFilter);
+                }
+            }
+        }
+
+        public static ma_result ma_loshelf2_init(ref ma_loshelf2_config pConfig, ma_loshelf2_ptr pFilter)
+        {
+            unsafe
+            {
+                return ma_loshelf2_init(ref pConfig, null, pFilter);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_loshelf2_uninit(ma_loshelf2_ptr pFilter, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_loshelf2_uninit(ma_loshelf2_ptr pFilter, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_loshelf2_uninit(pFilter, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_loshelf2_uninit(ma_loshelf2_ptr pFilter)
+        {
+            unsafe
+            {
+                ma_loshelf2_uninit(pFilter, null);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_loshelf2_reinit(ref ma_loshelf2_config pConfig, ma_loshelf2_ptr pFilter);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_loshelf2_process_pcm_frames(ma_loshelf2_ptr pFilter, IntPtr pFramesOut, IntPtr pFramesIn, UInt64 frameCount);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern UInt32 ma_loshelf2_get_latency(ma_loshelf2_ptr pFilter);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_hishelf2_config ma_hishelf2_config_init(ma_format format, UInt32 channels, UInt32 sampleRate, double gainDB, double shelfSlope, double frequency);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hishelf2_get_heap_size(ref ma_hishelf2_config pConfig, out size_t pHeapSizeInBytes);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hishelf2_init_preallocated(ref ma_hishelf2_config pConfig, IntPtr pHeap, ma_hishelf2_ptr pFilter);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe ma_result ma_hishelf2_init(ref ma_hishelf2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hishelf2_ptr pFilter);
+
+        public static ma_result ma_hishelf2_init(ref ma_hishelf2_config pConfig, ref ma_allocation_callbacks pAllocationCallbacks, ma_hishelf2_ptr pFilter)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    return ma_hishelf2_init(ref pConfig, pCallbacks, pFilter);
+                }
+            }
+        }
+
+        public static ma_result ma_hishelf2_init(ref ma_hishelf2_config pConfig, ma_hishelf2_ptr pFilter)
+        {
+            unsafe
+            {
+                return ma_hishelf2_init(ref pConfig, null, pFilter);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe void ma_hishelf2_uninit(ma_hishelf2_ptr pFilter, ma_allocation_callbacks* pAllocationCallbacks);
+
+        public static void ma_hishelf2_uninit(ma_hishelf2_ptr pFilter, ref ma_allocation_callbacks pAllocationCallbacks)
+        {
+            unsafe
+            {
+                fixed (ma_allocation_callbacks* pCallbacks = &pAllocationCallbacks)
+                {
+                    ma_hishelf2_uninit(pFilter, pCallbacks);
+                }
+            }
+        }
+
+        public static void ma_hishelf2_uninit(ma_hishelf2_ptr pFilter)
+        {
+            unsafe
+            {
+                ma_hishelf2_uninit(pFilter, null);
+            }
+        }
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hishelf2_reinit(ref ma_hishelf2_config pConfig, ma_hishelf2_ptr pFilter);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_result ma_hishelf2_process_pcm_frames(ma_hishelf2_ptr pFilter, IntPtr pFramesOut, IntPtr pFramesIn, UInt64 frameCount);
+        
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern UInt32 ma_hishelf2_get_latency(ma_hishelf2_ptr pFilter);
     }
 
     public static class MarshalHelper
