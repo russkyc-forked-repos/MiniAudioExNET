@@ -680,6 +680,10 @@ namespace MiniAudioEx.Native
         {
             pointer = handle;
         }
+		public ma_uint32_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
         public ma_uint32_ptr(bool allocate)
         {
             if (allocate)
@@ -705,7 +709,6 @@ namespace MiniAudioEx.Native
 		}
 	}
 
-
     [StructLayout(LayoutKind.Sequential)]
 	public unsafe struct ma_async_notification_ptr
 	{
@@ -714,6 +717,10 @@ namespace MiniAudioEx.Native
 		public ma_async_notification_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_async_notification_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_async_notification_ptr(bool allocate)
 		{
@@ -743,6 +750,10 @@ namespace MiniAudioEx.Native
 		public ma_biquad_coefficient_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_biquad_coefficient_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_biquad_coefficient_ptr(bool allocate)
 		{
@@ -778,6 +789,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_channel_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_channel_ptr(bool allocate)
 		{
 			if (allocate)
@@ -807,6 +822,10 @@ namespace MiniAudioEx.Native
         {
             pointer = handle;
         }
+		public ma_context_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
         public ma_context_ptr(bool allocate)
         {
             if (allocate)
@@ -817,7 +836,6 @@ namespace MiniAudioEx.Native
             pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.context);
             return pointer != IntPtr.Zero;
         }
-
         public void Free()
         {
             if (pointer != IntPtr.Zero)
@@ -841,6 +859,10 @@ namespace MiniAudioEx.Native
 		public ma_data_source_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_data_source_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_data_source_ptr(bool allocate)
 		{
@@ -871,6 +893,10 @@ namespace MiniAudioEx.Native
         {
             pointer = handle;
         }
+		public ma_data_source_node_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
         public ma_data_source_node_ptr(bool allocate)
         {
             if (allocate)
@@ -905,6 +931,10 @@ namespace MiniAudioEx.Native
         {
             pointer = handle;
         }
+		public ma_data_source_vtable_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
         public ma_data_source_vtable_ptr(bool allocate)
         {
             if (allocate)
@@ -938,6 +968,10 @@ namespace MiniAudioEx.Native
 		public ma_decoder_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_decoder_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_decoder_ptr(bool allocate)
 		{
@@ -973,6 +1007,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_decoding_backend_vtable_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_decoding_backend_vtable_ptr(bool allocate)
 		{
 			if (allocate)
@@ -1006,6 +1044,10 @@ namespace MiniAudioEx.Native
 		public ma_encoder_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_encoder_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_encoder_ptr(bool allocate)
 		{
@@ -1041,6 +1083,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_device_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_device_ptr(bool allocate)
 		{
 			if (allocate)
@@ -1074,6 +1120,10 @@ namespace MiniAudioEx.Native
 		public ma_device_id_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_device_id_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_device_id_ptr(bool allocate)
 		{
@@ -1109,6 +1159,10 @@ namespace MiniAudioEx.Native
         {
             pointer = handle;
         }
+		public ma_device_notification_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
         public ma_device_notification_ptr(bool allocate)
         {
             if (allocate)
@@ -1138,6 +1192,10 @@ namespace MiniAudioEx.Native
         {
             pointer = handle;
         }
+		public ma_device_descriptor_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
         public ma_device_descriptor_ptr(bool allocate)
         {
             if (allocate)
@@ -1171,6 +1229,10 @@ namespace MiniAudioEx.Native
 		public ma_device_info_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_device_info_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_device_info_ptr(bool allocate)
 		{
@@ -1206,6 +1268,10 @@ namespace MiniAudioEx.Native
         {
             pointer = handle;
         }
+		public ma_effect_node_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
         public ma_effect_node_ptr(bool allocate)
         {
             if (allocate)
@@ -1240,6 +1306,10 @@ namespace MiniAudioEx.Native
         {
             pointer = handle;
         }
+		public ma_engine_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
         public ma_engine_ptr(bool allocate)
         {
             if (allocate)
@@ -1274,6 +1344,10 @@ namespace MiniAudioEx.Native
         {
             pointer = handle;
         }
+		public ma_fader_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
         public ma_fader_ptr(bool allocate)
         {
             if (allocate)
@@ -1308,6 +1382,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_fence_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_fence_ptr(bool allocate)
 		{
 			if (allocate)
@@ -1337,6 +1415,10 @@ namespace MiniAudioEx.Native
         {
             pointer = handle;
         }
+		public ma_gainer_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
         public ma_gainer_ptr(bool allocate)
         {
             if (allocate)
@@ -1370,6 +1452,10 @@ namespace MiniAudioEx.Native
 		public ma_log_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_log_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_log_ptr(bool allocate)
 		{
@@ -1405,6 +1491,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_lpf_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_lpf_ptr(bool allocate)
 		{
 			if (allocate)
@@ -1438,6 +1528,10 @@ namespace MiniAudioEx.Native
 		public ma_lpf1_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_lpf1_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_lpf1_ptr(bool allocate)
 		{
@@ -1473,6 +1567,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_lpf2_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_lpf2_ptr(bool allocate)
 		{
 			if (allocate)
@@ -1506,6 +1604,10 @@ namespace MiniAudioEx.Native
 		public ma_hpf_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_hpf_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_hpf_ptr(bool allocate)
 		{
@@ -1541,6 +1643,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_hpf1_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_hpf1_ptr(bool allocate)
 		{
 			if (allocate)
@@ -1574,6 +1680,10 @@ namespace MiniAudioEx.Native
 		public ma_hpf2_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_hpf2_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_hpf2_ptr(bool allocate)
 		{
@@ -1609,6 +1719,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_bpf_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_bpf_ptr(bool allocate)
 		{
 			if (allocate)
@@ -1642,6 +1756,10 @@ namespace MiniAudioEx.Native
 		public ma_bpf2_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_bpf2_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_bpf2_ptr(bool allocate)
 		{
@@ -1677,6 +1795,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_biquad_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_biquad_ptr(bool allocate)
 		{
 			if (allocate)
@@ -1710,6 +1832,10 @@ namespace MiniAudioEx.Native
 		public ma_notch2_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_notch2_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_notch2_ptr(bool allocate)
 		{
@@ -1745,6 +1871,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_peak2_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_peak2_ptr(bool allocate)
 		{
 			if (allocate)
@@ -1778,6 +1908,10 @@ namespace MiniAudioEx.Native
 		public ma_loshelf2_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_loshelf2_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_loshelf2_ptr(bool allocate)
 		{
@@ -1813,6 +1947,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_hishelf2_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_hishelf2_ptr(bool allocate)
 		{
 			if (allocate)
@@ -1846,6 +1984,10 @@ namespace MiniAudioEx.Native
 		public ma_lpf_node_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_lpf_node_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_lpf_node_ptr(bool allocate)
 		{
@@ -1881,6 +2023,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_hpf_node_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_hpf_node_ptr(bool allocate)
 		{
 			if (allocate)
@@ -1914,6 +2060,10 @@ namespace MiniAudioEx.Native
 		public ma_bpf_node_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_bpf_node_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_bpf_node_ptr(bool allocate)
 		{
@@ -1949,6 +2099,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_notch_node_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_notch_node_ptr(bool allocate)
 		{
 			if (allocate)
@@ -1982,6 +2136,10 @@ namespace MiniAudioEx.Native
 		public ma_peak_node_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_peak_node_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_peak_node_ptr(bool allocate)
 		{
@@ -2017,6 +2175,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_loshelf_node_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_loshelf_node_ptr(bool allocate)
 		{
 			if (allocate)
@@ -2050,6 +2212,10 @@ namespace MiniAudioEx.Native
 		public ma_hishelf_node_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_hishelf_node_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_hishelf_node_ptr(bool allocate)
 		{
@@ -2085,6 +2251,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_delay_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_delay_ptr(bool allocate)
 		{
 			if (allocate)
@@ -2118,6 +2288,10 @@ namespace MiniAudioEx.Native
 		public ma_delay_node_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_delay_node_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_delay_node_ptr(bool allocate)
 		{
@@ -2153,6 +2327,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_splitter_node_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_splitter_node_ptr(bool allocate)
 		{
 			if (allocate)
@@ -2187,6 +2365,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_node_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_node_ptr(bool allocate)
 		{
 			if (allocate)
@@ -2215,6 +2397,10 @@ namespace MiniAudioEx.Native
 		public ma_node_base_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_node_base_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_node_base_ptr(bool allocate)
 		{
@@ -2250,6 +2436,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_node_graph_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_node_graph_ptr(bool allocate)
 		{
 			if (allocate)
@@ -2283,6 +2473,10 @@ namespace MiniAudioEx.Native
 		public ma_node_input_bus_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_node_input_bus_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_node_input_bus_ptr(bool allocate)
 		{
@@ -2318,6 +2512,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_node_output_bus_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_node_output_bus_ptr(bool allocate)
 		{
 			if (allocate)
@@ -2351,6 +2549,10 @@ namespace MiniAudioEx.Native
 		public ma_node_vtable_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_node_vtable_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_node_vtable_ptr(bool allocate)
 		{
@@ -2386,6 +2588,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_panner_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_panner_ptr(bool allocate)
 		{
 			if (allocate)
@@ -2419,6 +2625,10 @@ namespace MiniAudioEx.Native
 		public ma_procedural_data_source_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_procedural_data_source_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_procedural_data_source_ptr(bool allocate)
 		{
@@ -2454,6 +2664,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_resampling_backend_vtable_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_resampling_backend_vtable_ptr(bool allocate)
 		{
 			if (allocate)
@@ -2483,6 +2697,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_resource_manager_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_resource_manager_ptr(bool allocate)
 		{
 			if (allocate)
@@ -2511,6 +2729,10 @@ namespace MiniAudioEx.Native
 		public ma_resource_manager_data_source_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_resource_manager_data_source_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_resource_manager_data_source_ptr(bool allocate)
 		{
@@ -2542,6 +2764,10 @@ namespace MiniAudioEx.Native
         {
             pointer = handle;
         }
+		public ma_sound_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
         public ma_sound_ptr(bool allocate)
         {
             if (allocate)
@@ -2576,6 +2802,10 @@ namespace MiniAudioEx.Native
         {
             pointer = handle;
         }
+		public ma_sound_inlined_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
         public ma_sound_inlined_ptr(bool allocate)
         {
             if (allocate)
@@ -2611,6 +2841,10 @@ namespace MiniAudioEx.Native
         {
             pointer = handle;
         }
+		public ma_sound_group_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
         public ma_sound_group_ptr(bool allocate)
         {
             if (allocate)
@@ -2645,6 +2879,10 @@ namespace MiniAudioEx.Native
         {
             pointer = handle;
         }
+		public ma_spatializer_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
         public ma_spatializer_ptr(bool allocate)
         {
             if (allocate)
@@ -2678,6 +2916,10 @@ namespace MiniAudioEx.Native
 		public ma_spatializer_listener_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_spatializer_listener_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_spatializer_listener_ptr(bool allocate)
 		{
@@ -2713,6 +2955,10 @@ namespace MiniAudioEx.Native
 		{
 			pointer = handle;
 		}
+		public ma_stack_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
 		public ma_stack_ptr(bool allocate)
 		{
 			if (allocate)
@@ -2746,6 +2992,10 @@ namespace MiniAudioEx.Native
 		public ma_vfs_ptr(IntPtr handle)
 		{
 			pointer = handle;
+		}
+		public ma_vfs_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
 		}
 		public ma_vfs_ptr(bool allocate)
 		{
