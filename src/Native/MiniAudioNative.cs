@@ -80,6 +80,15 @@ namespace MiniAudioEx.Native
         private const string LIB_MINIAUDIO_EX = "miniaudioex";
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ma_uint32 ma_get_bytes_per_sample(ma_format format);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ma_uint32 ma_get_bytes_per_frame(ma_format format, ma_uint32 channels) 
+        { 
+            return ma_get_bytes_per_sample(format) * channels; 
+        }
+
+        [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr ma_allocate_type(ma_allocation_type type);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
