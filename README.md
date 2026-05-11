@@ -32,8 +32,14 @@ If you find something is missing from the API, please open an issue. This librar
 
 # Installation
 ```
-dotnet add package JAJ.Packages.MiniAudioEx --version 3.3.0
+dotnet add package JAJ.Packages.MiniAudioEx --version 3.3.1
 ```
+
+# Changes in 3.3.1
+- Added filters such as `ma_lpf`, `ma_hpf`, `ma_bpf` and others.
+- Added `ma_delay_node`.
+- Added `ma_splitter_node`.
+- Added `ma_waveform`, `ma_noise` and `ma_pulsewave`.
 
 # Changes in 3.3.0
 - Applied 16 KB page size fix for android.
