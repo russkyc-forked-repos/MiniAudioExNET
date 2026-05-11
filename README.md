@@ -32,8 +32,14 @@ If you find something is missing from the API, please open an issue. This librar
 
 # Installation
 ```
-dotnet add package JAJ.Packages.MiniAudioEx --version 3.3.1
+dotnet add package JAJ.Packages.MiniAudioEx --version 3.3.2
 ```
+
+# Changes in 3.3.2
+- Added convenience methods to obtain certain fields for the difficult to map ma_device structure:
+- Added method `ma_device_get_resampling`.
+- Added method `ma_device_get_playback`.
+- Added method `ma_device_get_capture`.
 
 # Changes in 3.3.1
 - Added filters such as `ma_lpf`, `ma_hpf`, `ma_bpf` and others.

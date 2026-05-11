@@ -354,10 +354,13 @@ namespace MiniAudioEx.Native
         delay,
         delay_node,
         device,
-        device_id,
-        device_notification,
+        device_capture,
         device_descriptor,
+        device_id,
         device_info,
+        device_notification,
+        device_playback,
+        device_resampling,
         effect_node,
         encoder,
         engine,
@@ -402,7 +405,7 @@ namespace MiniAudioEx.Native
         splitter_node,
         stack,
         vfs,
-        waveform
+        waveform,
     }
 
     public enum ma_device_type

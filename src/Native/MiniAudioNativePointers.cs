@@ -457,6 +457,120 @@ namespace MiniAudioEx.Native
     }
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_device_resampling_ptr
+	{
+		public IntPtr pointer;
+		public ma_device_resampling_ptr() { }
+		public ma_device_resampling_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_device_resampling_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
+		public ma_device_resampling_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.device_resampling);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_device_resampling* Get()
+		{
+			return (ma_device_resampling*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_device_playback_ptr
+	{
+		public IntPtr pointer;
+		public ma_device_playback_ptr() { }
+		public ma_device_playback_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_device_playback_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
+		public ma_device_playback_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.device_playback);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_device_playback* Get()
+		{
+			return (ma_device_playback*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct ma_device_capture_ptr
+	{
+		public IntPtr pointer;
+		public ma_device_capture_ptr() { }
+		public ma_device_capture_ptr(IntPtr handle)
+		{
+			pointer = handle;
+		}
+		public ma_device_capture_ptr(void* handle)
+		{
+			pointer = new IntPtr(handle);
+		}
+		public ma_device_capture_ptr(bool allocate)
+		{
+			if (allocate)
+				Allocate();
+		}
+		public bool Allocate()
+		{
+			pointer = MiniAudioNative.ma_allocate_type(ma_allocation_type.device_capture);
+			return pointer != IntPtr.Zero;
+		}
+		public void Free()
+		{
+			if (pointer != IntPtr.Zero)
+			{
+				MiniAudioNative.ma_deallocate_type(pointer);
+				pointer = IntPtr.Zero;
+			}
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ma_device_capture* Get()
+		{
+			return (ma_device_capture*)pointer;
+		}
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct ma_device_ptr
 	{
 		public IntPtr pointer;
@@ -2399,7 +2513,7 @@ namespace MiniAudioEx.Native
 		}
 	}
 
-[StructLayout(LayoutKind.Sequential)]
+	[StructLayout(LayoutKind.Sequential)]
     public unsafe struct ma_waveform_ptr
     {
 		public IntPtr pointer;

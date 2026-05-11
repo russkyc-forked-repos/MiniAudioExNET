@@ -1134,6 +1134,72 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_device_resampling
+    {
+        public ma_resample_algorithm algorithm;
+        public ma_resampling_backend_vtable_ptr pBackendVTable;
+        public IntPtr pBackendUserData;
+        public ma_device_lpf_order linear;
+        [StructLayout(LayoutKind.Sequential)]
+        public unsafe struct ma_device_lpf_order
+        {
+            ma_uint32 lpfOrder;
+        }
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_device_playback
+    {
+        public ma_device_id_ptr pID;                  /* Set to NULL if using default ID, otherwise set to the address of "id". */
+        public ma_device_id id;                    /* If using an explicit device, will be set to a copy of the ID used for initialization. Otherwise cleared to 0. */
+        public fixed byte name[MiniAudioNative.MA_MAX_DEVICE_NAME_LENGTH + 1]; /* Maybe temporary. Likely to be replaced with a query API. */
+        public ma_share_mode shareMode;            /* Set to whatever was passed in when the device was initialized. */
+        public ma_format format;
+        public ma_uint32 channels;
+        public fixed ma_channel channelMap[MiniAudioNative.MA_MAX_CHANNELS];
+        public ma_format internalFormat;
+        public ma_uint32 internalChannels;
+        public ma_uint32 internalSampleRate;
+        public fixed ma_channel internalChannelMap[MiniAudioNative.MA_MAX_CHANNELS];
+        public ma_uint32 internalPeriodSizeInFrames;
+        public ma_uint32 internalPeriods;
+        public ma_channel_mix_mode channelMixMode;
+        public ma_bool32 calculateLFEFromSpatialChannels;
+        public ma_data_converter converter;
+        public IntPtr pIntermediaryBuffer;          /* For implementing fixed sized buffer callbacks. Will be null if using variable sized callbacks. */
+        public ma_uint32 intermediaryBufferCap;
+        public ma_uint32 intermediaryBufferLen;    /* How many valid frames are sitting in the intermediary buffer. */
+        public IntPtr pInputCache;                  /* In external format. Can be null. */
+        public ma_uint64 inputCacheCap;
+        public ma_uint64 inputCacheConsumed;
+        public ma_uint64 inputCacheRemaining;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct ma_device_capture
+    {
+        public ma_device_id_ptr pID;                  /* Set to NULL if using default ID, otherwise set to the address of "id". */
+        public ma_device_id id;                    /* If using an explicit device, will be set to a copy of the ID used for initialization. Otherwise cleared to 0. */
+        public fixed byte name[MiniAudioNative.MA_MAX_DEVICE_NAME_LENGTH + 1];                     /* Maybe temporary. Likely to be replaced with a query API. */
+        public ma_share_mode shareMode;            /* Set to whatever was passed in when the device was initialized. */
+        public ma_format format;
+        public ma_uint32 channels;
+        public fixed ma_channel channelMap[MiniAudioNative.MA_MAX_CHANNELS];
+        public ma_format internalFormat;
+        public ma_uint32 internalChannels;
+        public ma_uint32 internalSampleRate;
+        public fixed ma_channel internalChannelMap[MiniAudioNative.MA_MAX_CHANNELS];
+        public ma_uint32 internalPeriodSizeInFrames;
+        public ma_uint32 internalPeriods;
+        public ma_channel_mix_mode channelMixMode;
+        public ma_bool32 calculateLFEFromSpatialChannels;
+        public ma_data_converter converter;
+        public IntPtr pIntermediaryBuffer;          /* For implementing fixed sized buffer callbacks. Will be null if using variable sized callbacks. */
+        public ma_uint32 intermediaryBufferCap;
+        public ma_uint32 intermediaryBufferLen;    /* How many valid frames are sitting in the intermediary buffer. */
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
     public unsafe struct ma_device
     {
         public ma_context_ptr pContext;
