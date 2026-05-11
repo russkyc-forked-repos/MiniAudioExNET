@@ -36,7 +36,7 @@ dotnet add package JAJ.Packages.MiniAudioEx --version 3.3.2
 ```
 
 # Changes in 3.3.2
-- Added convenience methods to obtain certain fields for the difficult to map ma_device structure:
+- Added convenience methods to obtain certain fields for the difficult to map `ma_device` structure:
 - Added method `ma_device_get_resampling`.
 - Added method `ma_device_get_playback`.
 - Added method `ma_device_get_capture`.
