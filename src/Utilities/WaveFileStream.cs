@@ -122,6 +122,17 @@ namespace MiniAudioEx.Utilities
 		}
 
         /// <summary>
+        /// Submits data to be written.
+        /// </summary>
+        /// <param name="framesIn"></param>
+        /// <param name="frameCountIn"></param>
+		public void OnProcess(NativeArray<Int16> framesIn, UInt32 frameCountIn)
+		{
+            WriteHeader();
+            WriteData(framesIn, frameCountIn);
+		}
+
+        /// <summary>
         /// Stops writing and closes the file.
         /// </summary>
         public void Dispose()
@@ -187,7 +198,7 @@ namespace MiniAudioEx.Utilities
             WriteInt32(subChunk2Id, header, 36);
             WriteInt32(subChunk2Size, header, 40);
 
-            stream = new FileStream(outputFilePath, FileMode.CreateNew);
+            stream = new FileStream(outputFilePath, FileMode.Create);
             stream.Write(header, 0, header.Length);
 
             bytesWritten = 0;
@@ -203,7 +214,7 @@ namespace MiniAudioEx.Utilities
             if(stream == null)
                 return;
 
-            UInt32 byteSize = (UInt32)(framesIn.Length * sizeof(short));
+            UInt32 byteSize = (UInt32)(framesIn.Length * sizeof(Int16));
 
             if(byteSize == 0)
                 return;
@@ -221,6 +232,42 @@ namespace MiniAudioEx.Utilities
                     for(Int32 i = 0; i < framesIn.Length; i++)
                     {
                         pBuffer[index] = (Int16)(framesIn[i] * Int16.MaxValue);
+                        index++;
+                    }
+                }
+            }
+
+            stream.Write(outputBuffer, 0, (Int32)byteSize);
+
+            bytesWritten += byteSize;
+        }
+
+        private void WriteData(NativeArray<Int16> framesIn, UInt32 frameCount)
+        {
+            if(GetState() != State.WriteData)
+                return;
+
+            if(stream == null)
+                return;
+
+            UInt32 byteSize = (UInt32)(framesIn.Length * sizeof(Int16));
+
+            if(byteSize == 0)
+                return;
+
+            if(outputBuffer.Length < byteSize)
+                outputBuffer = new byte[byteSize];
+
+            Int32 index = 0;
+
+            unsafe
+            {
+                fixed(byte *pOutputBuffer = &outputBuffer[0])
+                {
+                    Int16 *pBuffer = (Int16*)pOutputBuffer;
+                    for(Int32 i = 0; i < framesIn.Length; i++)
+                    {
+                        pBuffer[index] = framesIn[i];
                         index++;
                     }
                 }
