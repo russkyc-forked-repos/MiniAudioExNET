@@ -1,5 +1,5 @@
 // Shows one way to handle looping of a sound. 
-// https://miniaud.io/docs/examples/simple_looping.html
+// Original code: https://miniaud.io/docs/examples/simple_looping.html
 
 using System;
 using MiniAudioEx.Native;

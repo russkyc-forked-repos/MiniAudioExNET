@@ -1,5 +1,5 @@
 // Demonstrates playback of a sine wave. 
-// https://miniaud.io/docs/examples/simple_playback_sine.html
+// Original code: https://miniaud.io/docs/examples/simple_playback_sine.html
 
 using System;
 using MiniAudioEx.Native;

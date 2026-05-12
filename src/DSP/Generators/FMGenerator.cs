@@ -54,6 +54,7 @@ namespace MiniAudioEx.DSP.Generators
     public sealed class FMGenerator : IAudioGenerator
     {
         private Oscillator carrier;
+        private float sampleRate;
         private ConcurrentList<Oscillator> operators;
 
         public Oscillator Carrier
@@ -86,9 +87,14 @@ namespace MiniAudioEx.DSP.Generators
             }
         }
 
-        public FMGenerator(WaveType type, float frequency, float amplitude)
+        public FMGenerator(WaveType type, float frequency, float amplitude, float sampleRate = 0.0f)
         {
-            carrier = new Oscillator(type, frequency, amplitude);
+            if(sampleRate <= 0.0f)
+                this.sampleRate = AudioContext.SampleRate;
+            else
+                this.sampleRate = sampleRate;
+
+            carrier = new Oscillator(type, frequency, amplitude, sampleRate);
             operators = new ConcurrentList<Oscillator>();
         }
         
@@ -106,7 +112,7 @@ namespace MiniAudioEx.DSP.Generators
 
         public void AddOperator(WaveType type, float frequency, float depth)
         {
-            operators.Add(new Oscillator(type, frequency, depth));
+            operators.Add(new Oscillator(type, frequency, depth, sampleRate));
         }
 
         public void RemoveOperator(int index)

@@ -66,6 +66,7 @@ namespace MiniAudioEx.DSP.Generators
         private WaveType type;
         private float frequency;
         private float amplitude;
+        private float sampleRate;
         private float phase;
         private float phaseIncrement;
         private static readonly float TAU = (float)(2 * Math.PI);
@@ -108,6 +109,18 @@ namespace MiniAudioEx.DSP.Generators
             }
         }
 
+        public float SampleRate
+        {
+            get
+            {
+                return sampleRate;
+            }
+            set
+            {
+                sampleRate = value;
+            }
+        }
+
         public float Phase
         {
             get
@@ -120,12 +133,16 @@ namespace MiniAudioEx.DSP.Generators
             }
         }
 
-        public Oscillator(WaveType type, float frequency, float amplitude)
+        public Oscillator(WaveType type, float frequency, float amplitude, float sampleRate = 0.0f)
         {
             this.type = type;
             this.phase = 0.0f;
             this.frequency = frequency;
             this.amplitude = amplitude;
+            if(sampleRate <= 0.0f)
+                this.sampleRate = AudioContext.SampleRate;
+            else
+                this.sampleRate = sampleRate;
             SetPhaseIncrement();
             SetWaveFunction();
         }
