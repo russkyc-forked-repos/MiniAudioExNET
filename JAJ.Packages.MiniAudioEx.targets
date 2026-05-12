@@ -1,0 +1,8 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Condition=" '$(TargetPlatformIdentifier)' == 'ios' ">
+    <NativeReference Include="$(MSBuildThisFileDirectory)..\runtimes\ios-arm64\native\miniaudio.framework" Condition=" '$(RuntimeIdentifier)' == 'ios-arm64' or '$(RuntimeIdentifier)' == '' ">
+      <Kind>Dynamic</Kind>
+      <SmartLink>True</SmartLink>
+    </NativeReference>
+  </ItemGroup>
+</Project>

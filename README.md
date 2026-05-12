@@ -27,13 +27,17 @@ If you find something is missing from the API, please open an issue. This librar
 - Linux ARM32
 - OSX x86_64
 - OSX ARM64
+- iOS ARM64
 - Android ARM64
 - Android ARM32
 
 # Installation
 ```
-dotnet add package JAJ.Packages.MiniAudioEx --version 3.3.2
+dotnet add package JAJ.Packages.MiniAudioEx --version 3.3.3
 ```
+
+# Changes in 3.3.3
+- Added platform iOS ARM64.
 
 # Changes in 3.3.2
 - Added convenience methods to obtain certain fields for the difficult to map `ma_device` structure:

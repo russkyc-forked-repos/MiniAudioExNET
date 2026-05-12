@@ -6,7 +6,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <NoWarn>0618</NoWarn>
     <PackageId>JAJ.Packages.MiniAudioEx</PackageId>
-    <Version>3.3.2</Version>
+    <Version>3.3.3</Version>
     <Authors>W.M.R Jap-A-Joe</Authors>
     <PackageTags>miniaudio miniaudioex audio sound playback spatial dsp effects wav mp3 flac ogg</PackageTags>
     <Description>
@@ -26,21 +26,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="runtimes/**" PackagePath="runtimes" Visible="false" />
+    <Content Include="runtimes\**" PackagePath="runtimes" Visible="false" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="**/examples/**" />
-    <Compile Remove="**/examples/**" />
-    <EmbeddedResource Remove="**/examples/**" />
-    <None Remove="**/examples/**" />
+    <None Include="JAJ.Packages.MiniAudioEx.targets" Pack="true" PackagePath="buildTransitive" />
+    <None Include="JAJ.Packages.MiniAudioEx.targets" Pack="true" PackagePath="build" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="**/test/**" />
-    <Compile Remove="**/test/**" />
-    <EmbeddedResource Remove="**/test/**" />
-    <None Remove="**/test/**" />
+    <Content Remove="**\examples\**" />
+    <Compile Remove="**\examples\**" />
+    <EmbeddedResource Remove="**\examples\**" />
+    <None Remove="**\examples\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="**\test\**" />
+    <Compile Remove="**\test\**" />
+    <EmbeddedResource Remove="**\test\**" />
+    <None Remove="**\test\**" />
   </ItemGroup>
 
 </Project>
