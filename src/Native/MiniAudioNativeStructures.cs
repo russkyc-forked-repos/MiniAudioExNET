@@ -68,7 +68,7 @@ namespace MiniAudioEx.Native
     using ma_spinlock = UInt32;
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct size_t
+    public struct size_t
     {
         private UIntPtr value;
 
@@ -274,7 +274,7 @@ namespace MiniAudioEx.Native
 
     // ma_structures
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_allocation_callbacks
+    public struct ma_allocation_callbacks
     {
         public IntPtr pUserData;
         public IntPtr onMalloc;
@@ -312,7 +312,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_vec3f
+    public struct ma_vec3f
     {
         public float x;
         public float y;
@@ -332,14 +332,49 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_atomic_vec3f
+    public struct ma_atomic_vec3f
     {
         public ma_vec3f v;
         public ma_spinlock lck;
     }
 
+    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    public struct ma_atomic_bool32
+    {
+        [FieldOffset(0)]
+        public UInt32 value;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    public struct ma_atomic_uint32
+    {
+        [FieldOffset(0)]
+        public UInt32 value;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    public struct ma_atomic_int32
+    {
+        [FieldOffset(0)]
+        public Int32 value;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct ma_atomic_uint64
+    {
+        [FieldOffset(0)]
+        public UInt64 value;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    public struct ma_atomic_float
+    {
+        [FieldOffset(0)]
+        public float value;
+    }
+
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_panner_config
+    public struct ma_panner_config
     {
         public ma_format format;
         public ma_uint32 channels;
@@ -348,7 +383,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_panner
+    public struct ma_panner
     {
         public ma_format format;
         public ma_uint32 channels;
@@ -357,7 +392,23 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_engine_node
+    public struct ma_engine_node_config
+    {
+        public ma_engine_ptr pEngine;
+        public ma_engine_node_type type;
+        public ma_uint32 channelsIn;
+        public ma_uint32 channelsOut;
+        public ma_uint32 sampleRate;               /* Only used when the type is set to ma_engine_node_type_sound. */
+        public ma_uint32 volumeSmoothTimeInPCMFrames;  /* The number of frames to smooth over volume changes. Defaults to 0 in which case no smoothing is used. */
+        public ma_mono_expansion_mode monoExpansionMode;
+        public ma_bool8 isPitchDisabled;           /* Pitching can be explicitly disabled with MA_SOUND_FLAG_NO_PITCH to optimize processing. */
+        public ma_bool8 isSpatializationDisabled;  /* Spatialization can be explicitly disabled with MA_SOUND_FLAG_NO_SPATIALIZATION. */
+        public ma_uint8 pinnedListenerIndex;       /* The index of the listener this node should always use for spatialization. If set to MA_LISTENER_INDEX_CLOSEST the engine will use the closest listener. */
+        public ma_resampler_config resampling;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ma_engine_node
     {
         public ma_node_base baseNode;                              /* Must be the first member for compatibility with the ma_node API. */
         public ma_engine_ptr pEngine;                                 /* A pointer to the engine. Set based on the value from the config. */
@@ -383,7 +434,7 @@ namespace MiniAudioEx.Native
         public IntPtr _pHeap;
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct fade_settings
+        public struct fade_settings
         {
             public float volumeBeg;
             public float volumeEnd;
@@ -393,7 +444,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_engine_config
+    public struct ma_engine_config
     {
         public ma_resource_manager_ptr pResourceManager;          /* Can be null in which case a resource manager will be created for you. */
         public ma_context_ptr pContext;
@@ -438,7 +489,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_engine
+    public struct ma_engine
     {
         public ma_node_graph nodeGraph;                        /* An engine is a node graph. It should be able to be plugged into any ma_node_graph API (with a cast) which means this must be the first member of this struct. */
         public ma_resource_manager_ptr pResourceManager;
@@ -491,7 +542,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_procedural_data_source_config
+    public struct ma_procedural_data_source_config
     {
         public ma_format format;
         public ma_uint32 channels;
@@ -506,14 +557,14 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_procedural_data_source
+    public struct ma_procedural_data_source
     {
         public ma_data_source_base ds;
         public ma_procedural_data_source_config config;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_fader_config
+    public struct ma_fader_config
     {
         public ma_format format;
         public ma_uint32 channels;
@@ -521,7 +572,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_fader
+    public struct ma_fader
     {
         public ma_fader_config config;
         public float volumeBeg;            /* If volumeBeg and volumeEnd is equal to 1, no fading happens (ma_fader_process_pcm_frames() will run as a passthrough). */
@@ -531,7 +582,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_log_callback
+    public struct ma_log_callback
     {
         public IntPtr onLog;
         public IntPtr pUserData;
@@ -542,7 +593,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_log
+    public struct ma_log
     {
         public ma_log_callback_array callbacks;
         public ma_uint32 callbackCount;
@@ -550,13 +601,13 @@ namespace MiniAudioEx.Native
         //There is a mutex here but the size depends on platform
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct ma_log_callback_array
+        public struct ma_log_callback_array
         {
             public ma_log_callback cb0;
             public ma_log_callback cb1;
             public ma_log_callback cb2;
             public ma_log_callback cb3;
-            public ref ma_log_callback this[int index]
+            public unsafe ref ma_log_callback this[int index]
             {
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
@@ -575,7 +626,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_context_config
+    public struct ma_context_config
     {
         public ma_log_ptr pLog;
         public ma_thread_priority threadPriority;
@@ -590,19 +641,19 @@ namespace MiniAudioEx.Native
         public ma_backend_callbacks custom;
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct dsound_info
+        public struct dsound_info
         {
             public ma_handle hWnd; /* HWND. Optional window handle to pass into SetCooperativeLevel(). Will default to the foreground window, and if that fails, the desktop window. */
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct alsa_info
+        public struct alsa_info
         {
             public ma_bool32 useVerboseDeviceEnumeration;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct pulse_info
+        public struct pulse_info
         {
             public IntPtr pApplicationName;
             public IntPtr pServerName;
@@ -610,7 +661,7 @@ namespace MiniAudioEx.Native
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct coreaudio_info
+        public struct coreaudio_info
         {
             public ma_ios_session_category sessionCategory;
             public ma_uint32 sessionCategoryOptions;
@@ -619,7 +670,7 @@ namespace MiniAudioEx.Native
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct jack_info
+        public struct jack_info
         {
             public IntPtr pClientName;
             public ma_bool32 tryStartServer;
@@ -627,7 +678,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_context
+    public struct ma_context
     {
         public ma_backend_callbacks callbacks;
         public ma_backend backend;                 /* DirectSound, ALSA, etc. */
@@ -641,21 +692,21 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_resource_manager_pipeline_stage_notification
+    public struct ma_resource_manager_pipeline_stage_notification
     {
         public ma_async_notification_ptr pNotification;
         public ma_fence_ptr pFence;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_resource_manager_pipeline_notifications
+    public struct ma_resource_manager_pipeline_notifications
     {
         public ma_resource_manager_pipeline_stage_notification init;    /* Initialization of the decoder. */
         public ma_resource_manager_pipeline_stage_notification done;    /* Decoding fully completed. */
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_backend_callbacks
+    public struct ma_backend_callbacks
     {
         public IntPtr onContextInit;
         public IntPtr onContextUninit;
@@ -738,7 +789,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_sound_config
+    public struct ma_sound_config
     {
         public IntPtr pFilePath;                      /* Set this to load from the resource manager. */
         public IntPtr pFilePathW;                  /* Set this to load from the resource manager. */
@@ -769,7 +820,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_sound
+    public struct ma_sound
     {
         public ma_engine_node engineNode;          /* Must be the first member for compatibility with the ma_node API. */
         public ma_data_source_ptr pDataSource;
@@ -786,7 +837,7 @@ namespace MiniAudioEx.Native
         We're declaring a resource manager data source object here to save us a malloc when loading a
         sound via the resource manager, which I *think* will be the most common scenario.
         */
-        public ma_resource_manager_data_source_ptr* pResourceManagerDataSource;
+        public ma_resource_manager_data_source_ptr pResourceManagerDataSource;
 
         public void SetEndCallback(ma_sound_end_proc callback)
         {
@@ -795,7 +846,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_sound_inlined
+    public struct ma_sound_inlined
     {
         public ma_sound sound;
         public ma_sound_inlined_ptr pNext;
@@ -803,7 +854,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_sound_group_config
+    public struct ma_sound_group_config
     {
         public IntPtr pFilePath;                      /* Set this to load from the resource manager. */
         public IntPtr pFilePathW;                  /* Set this to load from the resource manager. */
@@ -833,7 +884,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_native_data_format
+    public struct ma_native_data_format
     {
         public ma_uint32 format; // Assuming ma_format is a uint. Adjust as necessary.
         public ma_uint32 channels; // If set to 0, all channels are supported.
@@ -870,7 +921,7 @@ namespace MiniAudioEx.Native
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct ma_native_data_format_array
+        public struct ma_native_data_format_array
         {
             public ma_native_data_format ndf0;
             public ma_native_data_format ndf1;
@@ -955,7 +1006,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_resampler_config
+    public struct ma_resampler_config
     {
         public ma_format format;   /* Must be either ma_format_f32 or ma_format_s16. */
         public ma_uint32 channels;
@@ -966,14 +1017,14 @@ namespace MiniAudioEx.Native
         public IntPtr pBackendUserData;
         public linear_info linear;
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct linear_info
+        public struct linear_info
         {
             public ma_uint32 lpfOrder;
         }
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_device_config
+    public struct ma_device_config
     {
         public ma_device_type deviceType;
         public ma_uint32 sampleRate;
@@ -1000,7 +1051,7 @@ namespace MiniAudioEx.Native
         public aaudio_info aaudio;
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct playback_info
+        public struct playback_info
         {
             public ma_device_id_ptr pDeviceID;
             public ma_format format;
@@ -1012,7 +1063,7 @@ namespace MiniAudioEx.Native
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct capture_info
+        public struct capture_info
         {
             public ma_device_id_ptr pDeviceID;
             public ma_format format;
@@ -1024,7 +1075,7 @@ namespace MiniAudioEx.Native
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct wasapi_info
+        public struct wasapi_info
         {
             public ma_wasapi_usage usage;              /* When configured, uses Avrt APIs to set the thread characteristics. */
             public ma_bool8 noAutoConvertSRC;          /* When set to true, disables the use of AUDCLNT_STREAMFLAGS_AUTOCONVERTPCM. */
@@ -1036,7 +1087,7 @@ namespace MiniAudioEx.Native
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct alsa_info
+        public struct alsa_info
         {
             public ma_bool32 noMMap;           /* Disables MMap mode. */
             public ma_bool32 noAutoFormat;     /* Opens the ALSA device with SND_PCM_NO_AUTO_FORMAT. */
@@ -1045,7 +1096,7 @@ namespace MiniAudioEx.Native
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct pulse_info
+        public struct pulse_info
         {
             public IntPtr pStreamNamePlayback;
             public IntPtr pStreamNameCapture;
@@ -1053,13 +1104,13 @@ namespace MiniAudioEx.Native
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct coreaudio_info
+        public struct coreaudio_info
         {
             public ma_bool32 allowNominalSampleRateChange; /* Desktop only. When enabled, allows changing of the sample rate at the operating system level. */
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct opensl_info
+        public struct opensl_info
         {
             public ma_opensl_stream_type streamType;
             public ma_opensl_recording_preset recordingPreset;
@@ -1067,7 +1118,7 @@ namespace MiniAudioEx.Native
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct aaudio_info
+        public struct aaudio_info
         {
             public ma_aaudio_usage usage;
             public ma_aaudio_content_type contentType;
@@ -1134,14 +1185,14 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_device_resampling
+    public struct ma_device_resampling
     {
         public ma_resample_algorithm algorithm;
         public ma_resampling_backend_vtable_ptr pBackendVTable;
         public IntPtr pBackendUserData;
         public ma_device_lpf_order linear;
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct ma_device_lpf_order
+        public struct ma_device_lpf_order
         {
             ma_uint32 lpfOrder;
         }
@@ -1200,7 +1251,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_device
+    public struct ma_device
     {
         public ma_context_ptr pContext;
         public ma_device_type type;
@@ -1229,7 +1280,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_decoder_config
+    public struct ma_decoder_config
     {
         public ma_format format;      /* Set to 0 or ma_format_unknown to use the stream's internal format. */
         public ma_uint32 channels;    /* Set to 0 to use the stream's internal channels. */
@@ -1249,7 +1300,7 @@ namespace MiniAudioEx.Native
         /// Sets the ppCustomBackendVTables and customBackendCount fields. The caller is responsible for cleaning up memory by calling FreeCustomBackendVTables().
         /// </summary>
         /// <param name="customDecodingBackends"></param>
-        public void SetCustomBackendVTables(ma_decoding_backend_vtable_ptr[] customDecodingBackends)
+        public unsafe void SetCustomBackendVTables(ma_decoding_backend_vtable_ptr[] customDecodingBackends)
         {
             int count = 0;
 
@@ -1293,7 +1344,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_decoder
+    public struct ma_decoder
     {
         public ma_data_source_base ds;
         public ma_data_source_ptr pBackend;                   /* The decoding backend we'll be pulling data from. */
@@ -1329,14 +1380,14 @@ namespace MiniAudioEx.Native
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct ma_decoder_data_vfs
+        public struct ma_decoder_data_vfs
         {
             public ma_vfs_ptr pVFS;
             public ma_vfs_file file;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct ma_decoder_data_memory
+        public struct ma_decoder_data_memory
         {
             public IntPtr pData; // const ma_uint8*
             public size_t dataSize;
@@ -1344,7 +1395,7 @@ namespace MiniAudioEx.Native
         }
 
         [StructLayout(LayoutKind.Explicit)]
-        public unsafe struct ma_decoder_data_union
+        public struct ma_decoder_data_union
         {
             [FieldOffset(0)]
             public ma_decoder_data_vfs vfs;
@@ -1355,7 +1406,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_encoder_config
+    public struct ma_encoder_config
     {
         public ma_encoding_format encodingFormat;
         public ma_format format;
@@ -1365,7 +1416,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_encoder
+    public struct ma_encoder
     {
         public ma_encoder_config config;
         public IntPtr onWrite;
@@ -1414,7 +1465,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_data_source_vtable
+    public struct ma_data_source_vtable
     {
         public IntPtr onRead;
         public IntPtr onSeek;
@@ -1456,27 +1507,27 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_data_source_config
+    public struct ma_data_source_config
     {
         public ma_data_source_vtable_ptr vtable;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_data_source_node_config
+    public struct ma_data_source_node_config
     {
         public ma_node_config nodeConfig;
         public ma_data_source_ptr pDataSource;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_data_source_node
+    public struct ma_data_source_node
     {
         public ma_node_base baseNode;
         public ma_data_source_ptr pDataSource;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_data_source_base
+    public struct ma_data_source_base
     {
         public IntPtr vtable;
         public ma_uint64 rangeBegInFrames;
@@ -1495,7 +1546,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_channel_converter
+    public struct ma_channel_converter
     {
         public ma_format format;
         public ma_uint32 channelsIn;
@@ -1511,7 +1562,7 @@ namespace MiniAudioEx.Native
         public ma_bool32 _ownsHeap;
         
         [StructLayout(LayoutKind.Explicit)]
-        public unsafe struct ma_channel_converter_weights
+        public struct ma_channel_converter_weights
         {
             [FieldOffset(0)]
             public IntPtr f32;  // float**
@@ -1521,7 +1572,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Explicit)]
-    public unsafe struct ma_biquad_coefficient
+    public struct ma_biquad_coefficient
     {
         [FieldOffset(0)]
         public float f32;
@@ -1530,7 +1581,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_biquad_config
+    public struct ma_biquad_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1543,7 +1594,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_biquad
+    public struct ma_biquad
     {
         public ma_format format;
         public UInt32 channels;
@@ -1552,14 +1603,14 @@ namespace MiniAudioEx.Native
         public ma_biquad_coefficient b2;
         public ma_biquad_coefficient a1;
         public ma_biquad_coefficient a2;
-        public ma_biquad_coefficient* pR1;
-        public ma_biquad_coefficient* pR2;
+        public ma_biquad_coefficient_ptr pR1;
+        public ma_biquad_coefficient_ptr pR2;
         public IntPtr _pHeap;
         public ma_bool32 _ownsHeap;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_lpf1_config
+    public struct ma_lpf1_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1569,7 +1620,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_lpf2_config
+    public struct ma_lpf2_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1579,25 +1630,25 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_lpf1
+    public struct ma_lpf1
     {
         public ma_format format;
         public UInt32 channels;
         public ma_biquad_coefficient a;
-        public ma_biquad_coefficient* pR1;
+        public ma_biquad_coefficient_ptr pR1;
         /* Memory management. */
         public IntPtr _pHeap;
         public ma_bool32 _ownsHeap;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_lpf2
+    public struct ma_lpf2
     {
         public ma_biquad bq;   /* The second order low-pass filter is implemented as a biquad filter. */
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_lpf_config
+    public struct ma_lpf_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1607,7 +1658,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_lpf
+    public struct ma_lpf
     {
         public ma_format format;
         public UInt32 channels;
@@ -1622,7 +1673,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_hpf1_config
+    public struct ma_hpf1_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1632,7 +1683,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_hpf2_config
+    public struct ma_hpf2_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1642,25 +1693,25 @@ namespace MiniAudioEx.Native
     }
     
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_hpf1
+    public struct ma_hpf1
     {
         public ma_format format;
         public UInt32 channels;
         public ma_biquad_coefficient a;
-        public ma_biquad_coefficient* pR1;
+        public ma_biquad_coefficient_ptr pR1;
         /* Memory management. */
         public IntPtr _pHeap;
         public ma_bool32 _ownsHeap;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_hpf2
+    public struct ma_hpf2
     {
         public ma_biquad bq;   /* The second order high-pass filter is implemented as a biquad filter. */
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_hpf_config
+    public struct ma_hpf_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1670,7 +1721,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_hpf
+    public struct ma_hpf
     {
         public ma_format format;
         public UInt32 channels;
@@ -1685,7 +1736,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_bpf2_config
+    public struct ma_bpf2_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1695,13 +1746,13 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_bpf2
+    public struct ma_bpf2
     {
         public ma_biquad bq;   /* The second order band-pass filter is implemented as a biquad filter. */
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_bpf_config
+    public struct ma_bpf_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1711,7 +1762,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_bpf
+    public struct ma_bpf
     {
         public ma_format format;
         public UInt32 channels;
@@ -1723,7 +1774,7 @@ namespace MiniAudioEx.Native
     }
     
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_notch2_config
+    public struct ma_notch2_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1733,7 +1784,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_notch_config
+    public struct ma_notch_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1743,24 +1794,13 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_notch2
+    public struct ma_notch2
     {
         public ma_biquad bq;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_peak2_config
-    {
-        public ma_format format;
-        public UInt32 channels;
-        public UInt32 sampleRate;
-        public double gainDB;
-        public double q;
-        public double frequency;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_peak_config
+    public struct ma_peak2_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1771,13 +1811,24 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_peak2
+    public struct ma_peak_config
+    {
+        public ma_format format;
+        public UInt32 channels;
+        public UInt32 sampleRate;
+        public double gainDB;
+        public double q;
+        public double frequency;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ma_peak2
     {
         public ma_biquad bq;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_loshelf2_config
+    public struct ma_loshelf2_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1788,7 +1839,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_loshelf_config
+    public struct ma_loshelf_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1799,13 +1850,13 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_loshelf2
+    public struct ma_loshelf2
     {
         public ma_biquad bq;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_hishelf2_config
+    public struct ma_hishelf2_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1816,7 +1867,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_hishelf_config
+    public struct ma_hishelf_config
     {
         public ma_format format;
         public UInt32 channels;
@@ -1827,13 +1878,13 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_hishelf2
+    public struct ma_hishelf2
     {
         public ma_biquad bq;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_lpf_node_config
+    public struct ma_lpf_node_config
     {
         public ma_node_config nodeConfig;
         public ma_lpf_config lpf;
@@ -1847,91 +1898,91 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_hpf_node_config
+    public struct ma_hpf_node_config
     {
         public ma_node_config nodeConfig;
         public ma_hpf_config hpf;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_hpf_node
+    public struct ma_hpf_node
     {
         public ma_node_base baseNode;
         public ma_hpf hpf;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_bpf_node_config
+    public struct ma_bpf_node_config
     {
         public ma_node_config nodeConfig;
         public ma_bpf_config bpf;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_bpf_node
+    public struct ma_bpf_node
     {
         public ma_node_base baseNode;
         public ma_bpf bpf;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_notch_node_config
+    public struct ma_notch_node_config
     {
         public ma_node_config nodeConfig;
         public ma_notch_config notch;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_notch_node
+    public struct ma_notch_node
     {
         public ma_node_base baseNode;
         public ma_notch2 notch;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_peak_node_config
+    public struct ma_peak_node_config
     {
         public ma_node_config nodeConfig;
         public ma_peak_config peak;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_peak_node
+    public struct ma_peak_node
     {
         public ma_node_base baseNode;
         public ma_peak2 peak;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_loshelf_node_config
+    public struct ma_loshelf_node_config
     {
         public ma_node_config nodeConfig;
         public ma_loshelf_config loshelf;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_loshelf_node
+    public struct ma_loshelf_node
     {
         public ma_node_base baseNode;
         public ma_loshelf2 loshelf;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_hishelf_node_config
+    public struct ma_hishelf_node_config
     {
         public ma_node_config nodeConfig;
         public ma_hishelf_config hishelf;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_hishelf_node
+    public struct ma_hishelf_node
     {
         public ma_node_base baseNode;
         public ma_hishelf2 hishelf;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_delay_config
+    public struct ma_delay_config
     {
         public ma_uint32 channels;
         public ma_uint32 sampleRate;
@@ -1943,7 +1994,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_delay
+    public struct ma_delay
     {
         public ma_delay_config config;
         public ma_uint32 cursor;               /* Feedback is written to this cursor. Always equal or in front of the read cursor. */
@@ -1952,21 +2003,21 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_delay_node_config
+    public struct ma_delay_node_config
     {
         public ma_node_config nodeConfig;
         public ma_delay_config delay;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_delay_node
+    public struct ma_delay_node
     {
         public ma_node_base baseNode;
         public ma_delay delay;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_splitter_node_config
+    public struct ma_splitter_node_config
     {
         public ma_node_config nodeConfig;
         public ma_uint32 channels;
@@ -1974,13 +2025,13 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_splitter_node
+    public struct ma_splitter_node
     {
         public ma_node_base baseNode;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_linear_resampler_config
+    public struct ma_linear_resampler_config
     {
         public ma_format format;
         public ma_uint32 channels;
@@ -1991,7 +2042,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_linear_resampler
+    public struct ma_linear_resampler
     {
         public ma_linear_resampler_config config;
         public ma_uint32 inAdvanceInt;
@@ -2006,7 +2057,7 @@ namespace MiniAudioEx.Native
         public ma_bool32 _ownsHeap;
 
         [StructLayout(LayoutKind.Explicit)]
-        public unsafe struct ma_linear_resampler_data
+        public struct ma_linear_resampler_data
         {
             [FieldOffset(0)]
             public IntPtr f32;
@@ -2016,7 +2067,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_resampler
+    public struct ma_resampler
     {
         public IntPtr pBackend;
         public IntPtr pBackendVTable;
@@ -2031,7 +2082,7 @@ namespace MiniAudioEx.Native
         public ma_bool32 _ownsHeap;
 
         [StructLayout(LayoutKind.Explicit)]
-        public unsafe struct ma_resampler_state
+        public struct ma_resampler_state
         {
             [FieldOffset(0)]
             public ma_linear_resampler linear;
@@ -2039,7 +2090,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_data_converter
+    public struct ma_data_converter
     {
         public ma_format formatIn;
         public ma_format formatOut;
@@ -2062,7 +2113,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_resource_manager_config
+    public struct ma_resource_manager_config
     {
         public ma_allocation_callbacks allocationCallbacks;
         public ma_log_ptr pLog;
@@ -2083,7 +2134,7 @@ namespace MiniAudioEx.Native
         /// Sets the ppCustomDecodingBackendVTables and customDecodingBackendCount fields. The caller is responsible for cleaning up memory by calling FreeCustomDecodingBackendVTables().
         /// </summary>
         /// <param name="customDecodingBackends"></param>
-        public void SetCustomDecodingBackendVTables(ma_decoding_backend_vtable_ptr[] customDecodingBackends)
+        public unsafe void SetCustomDecodingBackendVTables(ma_decoding_backend_vtable_ptr[] customDecodingBackends)
         {
             int count = 0;
 
@@ -2127,7 +2178,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_decoding_backend_vtable
+    public struct ma_decoding_backend_vtable
     {
         public IntPtr onInit;
         public IntPtr onInitFile;
@@ -2145,7 +2196,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_node_config
+    public struct ma_node_config
     {
         public ma_node_vtable_ptr vtable;          /* Should never be null. Initialization of the node will fail if so. */
         public ma_node_state initialState;         /* Defaults to ma_node_state_started. */
@@ -2156,7 +2207,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_node_vtable
+    public struct ma_node_vtable
     {
         /*
         Extended processing callback. This callback is used for effects that process input and output
@@ -2210,7 +2261,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_node_output_bus
+    public struct ma_node_output_bus
     {
         /* Immutable. */
         public ma_node_ptr pNode;                                         /* The node that owns this output bus. The input node. Will be null for dummy head and tail nodes. */
@@ -2230,7 +2281,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_node_input_bus
+    public struct ma_node_input_bus
     {
         /* Mutable via multiple threads. */
         public ma_node_output_bus head;                /* Dummy head node for simplifying some lock-free thread-safety stuff. */
@@ -2270,7 +2321,7 @@ namespace MiniAudioEx.Native
         public ma_bool32 _ownsHeap;    /* If set to true, the node owns the heap allocation and _pHeap will be freed in ma_node_uninit(). */
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct ma_node_input_bus_array
+        public struct ma_node_input_bus_array
         {
             public ma_node_input_bus b0;
             public ma_node_input_bus b1;
@@ -2292,7 +2343,7 @@ namespace MiniAudioEx.Native
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct ma_node_output_bus_array
+        public struct ma_node_output_bus_array
         {
             public ma_node_output_bus b0;
             public ma_node_output_bus b1;
@@ -2315,7 +2366,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_node_graph_config
+    public struct ma_node_graph_config
     {
         public ma_uint32 channels;
         public ma_uint32 processingSizeInFrames;   /* This is the preferred processing size for node processing callbacks unless overridden by a node itself. Can be 0 in which case it will be based on the frame count passed into ma_node_graph_read_pcm_frames(), but will not be well defined. */
@@ -2323,7 +2374,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_node_graph
+    public struct ma_node_graph
     {
         /* Immutable. */
         public ma_node_base baseNode;                  /* The node graph itself is a node so it can be connected as an input to different node graph. This has zero inputs and calls ma_node_graph_read_pcm_frames() to generate it's output. */
@@ -2338,7 +2389,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_effect_node_config
+    public struct ma_effect_node_config
     {
         public ma_uint32 sampleRate;
         public ma_uint32 channels;
@@ -2359,14 +2410,14 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_gainer_config
+    public struct ma_gainer_config
     {
         public ma_uint32 channels;
         public ma_uint32 smoothTimeInFrames;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_gainer
+    public struct ma_gainer
     {
         public ma_gainer_config config;
         public ma_uint32 t;
@@ -2379,7 +2430,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_spatializer_config
+    public struct ma_spatializer_config
     {
         public ma_uint32 channelsIn;
         public ma_uint32 channelsOut;
@@ -2402,7 +2453,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_spatializer
+    public struct ma_spatializer
     {
         public ma_uint32 channelsIn;
         public ma_uint32 channelsOut;
@@ -2434,7 +2485,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_spatializer_listener_config
+    public struct ma_spatializer_listener_config
     {
         public ma_uint32 channelsOut;
         public ma_channel_ptr pChannelMapOut;
@@ -2447,7 +2498,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_spatializer_listener
+    public struct ma_spatializer_listener
     {
         public ma_spatializer_listener_config config;
         public ma_atomic_vec3f position;  /* The absolute position of the listener. */
@@ -2460,7 +2511,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_waveform_config
+    public struct ma_waveform_config
     {
         public ma_format format;
         public ma_uint32 channels;
@@ -2471,7 +2522,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_waveform
+    public struct ma_waveform
     {
         public ma_data_source_base ds;
         public ma_waveform_config config;
@@ -2480,7 +2531,7 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_pulsewave_config
+    public struct ma_pulsewave_config
     {
         public ma_format format;
         public ma_uint32 channels;
@@ -2491,14 +2542,14 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_pulsewave
+    public struct ma_pulsewave
     {
         public ma_waveform waveform;
         public ma_pulsewave_config config;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_noise_config
+    public struct ma_noise_config
     {
         public ma_format format;
         public ma_uint32 channels;
@@ -2509,13 +2560,13 @@ namespace MiniAudioEx.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_lcg
+    public struct ma_lcg
     {
         public ma_uint32 state;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct ma_noise
+    public struct ma_noise
     {
         ma_data_source_base ds;
         ma_noise_config config;
