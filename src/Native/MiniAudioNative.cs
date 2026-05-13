@@ -157,7 +157,7 @@ namespace MiniAudioEx.Native
         public static extern ma_context_config ma_context_config_init();
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe ma_result ma_context_init(ma_backend* backends, ma_uint32 backendCount, ma_context_config* pConfig, ma_context_ptr pContext);
+        private static extern unsafe ma_result ma_context_init(ma_backend* backends, ma_uint32 backendCount, ma_context_config* pConfig, ma_context_ptr pContext);
 
         public static unsafe ma_result ma_context_init(ma_backend[] backends, ref ma_context_config config, ma_context_ptr pContext)
         {
@@ -210,7 +210,7 @@ namespace MiniAudioEx.Native
         }
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe ma_result ma_context_get_devices(ma_context_ptr pContext, ma_device_info** ppPlaybackDeviceInfos, ma_uint32* pPlaybackDeviceCount, ma_device_info** ppCaptureDeviceInfos, ma_uint32* pCaptureDeviceCount);
+        private static extern unsafe ma_result ma_context_get_devices(ma_context_ptr pContext, ma_device_info** ppPlaybackDeviceInfos, ma_uint32* pPlaybackDeviceCount, ma_device_info** ppCaptureDeviceInfos, ma_uint32* pCaptureDeviceCount);
 
         public static unsafe ma_result ma_context_get_devices(ma_context_ptr pContext, out ma_device_info[] ppPlaybackDeviceInfos, out ma_device_info[] ppCaptureDeviceInfos)
         {
@@ -1354,7 +1354,7 @@ namespace MiniAudioEx.Native
         }
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe ma_result ma_effect_node_init(ma_node_graph_ptr pNodeGraph, ref ma_effect_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_effect_node_ptr pEffectNode);
+        private static extern unsafe ma_result ma_effect_node_init(ma_node_graph_ptr pNodeGraph, ref ma_effect_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_effect_node_ptr pEffectNode);
 
         public static ma_result ma_effect_node_init(ma_node_graph_ptr pNodeGraph, ref ma_effect_node_config pConfig, ma_effect_node_ptr pEffectNode)
         {
@@ -1365,7 +1365,7 @@ namespace MiniAudioEx.Native
         }
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe void ma_effect_node_uninit(ma_effect_node_ptr pEffectNode, ma_allocation_callbacks* pAllocationCallbacks);
+        private static extern unsafe void ma_effect_node_uninit(ma_effect_node_ptr pEffectNode, ma_allocation_callbacks* pAllocationCallbacks);
 
         public static void ma_effect_node_uninit(ma_effect_node_ptr pEffectNode)
         {
@@ -2190,7 +2190,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_notch2_get_heap_size(ref ma_notch2_config pConfig, out size_t pHeapSizeInBytes);
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe ma_result ma_notch2_init_preallocated(ref ma_notch2_config pConfig, IntPtr pHeap, ma_notch2_ptr pFilter);
+        public static extern ma_result ma_notch2_init_preallocated(ref ma_notch2_config pConfig, IntPtr pHeap, ma_notch2_ptr pFilter);
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe ma_result ma_notch2_init(ref ma_notch2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_notch2_ptr pFilter);
