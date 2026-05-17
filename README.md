@@ -392,6 +392,12 @@ namespace MiniAudioExExample
 }
 ```
 
+# Demo Applications
+[MiniAudioPlayer](https://github.com/japajoe/MiniAudioPlayer)
+[MiniAudioRecorder](https://github.com/japajoe/MiniAudioRecorder)
+
+# More examples
+
 See links below for more examples. Most of these use the `AudioApp` class which is suitable for simple console based applications.
 
 [Playing audio from a file on disk](https://github.com/japajoe/MiniAudioExNET/blob/master/examples/PlayingFromFileExample.cs)
