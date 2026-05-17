@@ -2061,261 +2061,69 @@ namespace MiniAudioEx.Native
         [StructLayout(LayoutKind.Sequential)]
         public struct ma_native_data_format_array
         {
-            /// <summary>
-            /// Native data format slot 0.
-            /// </summary>
             public ma_native_data_format ndf0;
-            /// <summary>
-            /// Native data format slot 1.
-            /// </summary>
             public ma_native_data_format ndf1;
-            /// <summary>
-            /// Native data format slot 2.
-            /// </summary>
             public ma_native_data_format ndf2;
-            /// <summary>
-            /// Native data format slot 3.
-            /// </summary>
             public ma_native_data_format ndf3;
-            /// <summary>
-            /// Native data format slot 4.
-            /// </summary>
             public ma_native_data_format ndf4;
-            /// <summary>
-            /// Native data format slot 5.
-            /// </summary>
             public ma_native_data_format ndf5;
-            /// <summary>
-            /// Native data format slot 6.
-            /// </summary>
             public ma_native_data_format ndf6;
-            /// <summary>
-            /// Native data format slot 7.
-            /// </summary>
             public ma_native_data_format ndf7;
-            /// <summary>
-            /// Native data format slot 8.
-            /// </summary>
             public ma_native_data_format ndf8;
-            /// <summary>
-            /// Native data format slot 9.
-            /// </summary>
             public ma_native_data_format ndf9;
-            /// <summary>
-            /// Native data format slot 10.
-            /// </summary>
             public ma_native_data_format ndf10;
-            /// <summary>
-            /// Native data format slot 11.
-            /// </summary>
             public ma_native_data_format ndf11;
-            /// <summary>
-            /// Native data format slot 12.
-            /// </summary>
             public ma_native_data_format ndf12;
-            /// <summary>
-            /// Native data format slot 13.
-            /// </summary>
             public ma_native_data_format ndf13;
-            /// <summary>
-            /// Native data format slot 14.
-            /// </summary>
             public ma_native_data_format ndf14;
-            /// <summary>
-            /// Native data format slot 15.
-            /// </summary>
             public ma_native_data_format ndf15;
-            /// <summary>
-            /// Native data format slot 16.
-            /// </summary>
             public ma_native_data_format ndf16;
-            /// <summary>
-            /// Native data format slot 17.
-            /// </summary>
             public ma_native_data_format ndf17;
-            /// <summary>
-            /// Native data format slot 18.
-            /// </summary>
             public ma_native_data_format ndf18;
-            /// <summary>
-            /// Native data format slot 19.
-            /// </summary>
             public ma_native_data_format ndf19;
-            /// <summary>
-            /// Native data format slot 20.
-            /// </summary>
             public ma_native_data_format ndf20;
-            /// <summary>
-            /// Native data format slot 21.
-            /// </summary>
             public ma_native_data_format ndf21;
-            /// <summary>
-            /// Native data format slot 22.
-            /// </summary>
             public ma_native_data_format ndf22;
-            /// <summary>
-            /// Native data format slot 23.
-            /// </summary>
             public ma_native_data_format ndf23;
-            /// <summary>
-            /// Native data format slot 24.
-            /// </summary>
             public ma_native_data_format ndf24;
-            /// <summary>
-            /// Native data format slot 25.
-            /// </summary>
             public ma_native_data_format ndf25;
-            /// <summary>
-            /// Native data format slot 26.
-            /// </summary>
             public ma_native_data_format ndf26;
-            /// <summary>
-            /// Native data format slot 27.
-            /// </summary>
             public ma_native_data_format ndf27;
-            /// <summary>
-            /// Native data format slot 28.
-            /// </summary>
             public ma_native_data_format ndf28;
-            /// <summary>
-            /// Native data format slot 29.
-            /// </summary>
             public ma_native_data_format ndf29;
-            /// <summary>
-            /// Native data format slot 30.
-            /// </summary>
             public ma_native_data_format ndf30;
-            /// <summary>
-            /// Native data format slot 31.
-            /// </summary>
             public ma_native_data_format ndf31;
-            /// <summary>
-            /// Native data format slot 32.
-            /// </summary>
             public ma_native_data_format ndf32;
-            /// <summary>
-            /// Native data format slot 33.
-            /// </summary>
             public ma_native_data_format ndf33;
-            /// <summary>
-            /// Native data format slot 34.
-            /// </summary>
             public ma_native_data_format ndf34;
-            /// <summary>
-            /// Native data format slot 35.
-            /// </summary>
             public ma_native_data_format ndf35;
-            /// <summary>
-            /// Native data format slot 36.
-            /// </summary>
             public ma_native_data_format ndf36;
-            /// <summary>
-            /// Native data format slot 37.
-            /// </summary>
             public ma_native_data_format ndf37;
-            /// <summary>
-            /// Native data format slot 38.
-            /// </summary>
             public ma_native_data_format ndf38;
-            /// <summary>
-            /// Native data format slot 39.
-            /// </summary>
             public ma_native_data_format ndf39;
-            /// <summary>
-            /// Native data format slot 40.
-            /// </summary>
             public ma_native_data_format ndf40;
-            /// <summary>
-            /// Native data format slot 41.
-            /// </summary>
             public ma_native_data_format ndf41;
-            /// <summary>
-            /// Native data format slot 42.
-            /// </summary>
             public ma_native_data_format ndf42;
-            /// <summary>
-            /// Native data format slot 43.
-            /// </summary>
             public ma_native_data_format ndf43;
-            /// <summary>
-            /// Native data format slot 44.
-            /// </summary>
             public ma_native_data_format ndf44;
-            /// <summary>
-            /// Native data format slot 45.
-            /// </summary>
             public ma_native_data_format ndf45;
-            /// <summary>
-            /// Native data format slot 46.
-            /// </summary>
             public ma_native_data_format ndf46;
-            /// <summary>
-            /// Native data format slot 47.
-            /// </summary>
             public ma_native_data_format ndf47;
-            /// <summary>
-            /// Native data format slot 48.
-            /// </summary>
             public ma_native_data_format ndf48;
-            /// <summary>
-            /// Native data format slot 49.
-            /// </summary>
             public ma_native_data_format ndf49;
-            /// <summary>
-            /// Native data format slot 50.
-            /// </summary>
             public ma_native_data_format ndf50;
-            /// <summary>
-            /// Native data format slot 51.
-            /// </summary>
             public ma_native_data_format ndf51;
-            /// <summary>
-            /// Native data format slot 52.
-            /// </summary>
             public ma_native_data_format ndf52;
-            /// <summary>
-            /// Native data format slot 53.
-            /// </summary>
             public ma_native_data_format ndf53;
-            /// <summary>
-            /// Native data format slot 54.
-            /// </summary>
             public ma_native_data_format ndf54;
-            /// <summary>
-            /// Native data format slot 55.
-            /// </summary>
             public ma_native_data_format ndf55;
-            /// <summary>
-            /// Native data format slot 56.
-            /// </summary>
             public ma_native_data_format ndf56;
-            /// <summary>
-            /// Native data format slot 57.
-            /// </summary>
             public ma_native_data_format ndf57;
-            /// <summary>
-            /// Native data format slot 58.
-            /// </summary>
             public ma_native_data_format ndf58;
-            /// <summary>
-            /// Native data format slot 59.
-            /// </summary>
             public ma_native_data_format ndf59;
-            /// <summary>
-            /// Native data format slot 60.
-            /// </summary>
             public ma_native_data_format ndf60;
-            /// <summary>
-            /// Native data format slot 61.
-            /// </summary>
             public ma_native_data_format ndf61;
-            /// <summary>
-            /// Native data format slot 62.
-            /// </summary>
             public ma_native_data_format ndf62;
-            /// <summary>
-            /// Native data format slot 63.
-            /// </summary>
             public ma_native_data_format ndf63;
             /// <summary>
             /// Indexed access to the native data format array. Bounds-checked between 0 and 63.

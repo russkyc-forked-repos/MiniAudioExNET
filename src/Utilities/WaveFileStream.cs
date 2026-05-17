@@ -77,7 +77,16 @@ namespace MiniAudioEx.Utilities
         /// <summary>
         /// Indicates whether the WaveFileWriter is currently writing to disk or not.
         /// </summary>
-        public bool IsActive => GetState() != State.Idle;
+        public bool IsActive
+        {
+            get
+            {
+                lock (stateLock)
+                {
+                    return state != State.Idle;
+                }
+            }
+        }
 
         public WaveFileStream(UInt32 sampleRate, UInt32 channels)
         {
@@ -94,12 +103,16 @@ namespace MiniAudioEx.Utilities
         /// <param name="outputFilePath">The file path of where to write the data</param>
         public void Start(string outputFilePath)
         {
-            if(GetState() != State.Idle) 
-                return;
-            
-            this.outputFilePath = outputFilePath;
+            lock (stateLock)
+            {
+                if (state != State.Idle)
+                {
+                    return;
+                }
 
-            SetState(State.WriteHeader);
+                this.outputFilePath = outputFilePath;
+                state = State.WriteHeader;
+            }
         }
 
         /// <summary>
@@ -107,7 +120,10 @@ namespace MiniAudioEx.Utilities
         /// </summary>
         public void Stop()
         {
-            CloseFile();
+            lock (stateLock)
+            {
+                CloseFile();
+            }
         }
 
         /// <summary>
@@ -115,57 +131,56 @@ namespace MiniAudioEx.Utilities
         /// </summary>
         /// <param name="framesIn"></param>
         /// <param name="frameCountIn"></param>
-		public void OnProcess(NativeArray<float> framesIn, UInt32 frameCountIn)
-		{
-            WriteHeader();
-            WriteData(framesIn, frameCountIn);
-		}
+        public void OnProcess(NativeArray<float> framesIn, UInt32 frameCountIn)
+        {
+            lock (stateLock)
+            {
+                WriteHeader();
+                WriteData(framesIn, frameCountIn);
+            }
+        }
 
         /// <summary>
         /// Submits data to be written.
         /// </summary>
         /// <param name="framesIn"></param>
         /// <param name="frameCountIn"></param>
-		public void OnProcess(NativeArray<Int16> framesIn, UInt32 frameCountIn)
-		{
-            WriteHeader();
-            WriteData(framesIn, frameCountIn);
-		}
+        public void OnProcess(NativeArray<Int16> framesIn, UInt32 frameCountIn)
+        {
+            lock (stateLock)
+            {
+                WriteHeader();
+                WriteData(framesIn, frameCountIn);
+            }
+        }
 
         /// <summary>
         /// Stops writing and closes the file.
         /// </summary>
         public void Dispose()
         {
-            CloseFile();
-        }
-
-        private State GetState()
-        {
             lock (stateLock)
             {
-                return state;
-            }
-        }
-
-        private void SetState(State newState)
-        {
-            lock (stateLock)
-            {
-                state = newState;
+                CloseFile();
             }
         }
 
         private void WriteHeader()
         {
-            if(GetState() != State.WriteHeader)
+            if (state != State.WriteHeader)
+            {
                 return;
+            }
 
-            if(bytesWritten > 0)
+            if (bytesWritten > 0)
+            {
                 return;
+            }
 
-            if(stream != null)
+            if (stream != null)
+            {
                 return;
+            }
 
             byte[] header = new byte[44];
 
@@ -183,7 +198,7 @@ namespace MiniAudioEx.Utilities
             Int16 bitsPerSample = bitDepth;
             Int32 subChunk2Id = 1635017060;       //"data"
             Int32 subChunk2Size = 0;
-            
+
             WriteInt32(chunkId, header, 0);
             WriteInt32(chunkSize, header, 4);
             WriteInt32(format, header, 8);
@@ -202,53 +217,20 @@ namespace MiniAudioEx.Utilities
             stream.Write(header, 0, header.Length);
 
             bytesWritten = 0;
-
-            SetState(State.WriteData);
-        }
-
-        private void WriteData(NativeArray<float> framesIn, UInt32 frameCount)
-        {
-            if(GetState() != State.WriteData)
-                return;
-
-            if(stream == null)
-                return;
-
-            UInt32 byteSize = (UInt32)(framesIn.Length * sizeof(Int16));
-
-            if(byteSize == 0)
-                return;
-
-            if(outputBuffer.Length < byteSize)
-                outputBuffer = new byte[byteSize];
-
-            Int32 index = 0;
-
-            unsafe
-            {
-                fixed(byte *pOutputBuffer = &outputBuffer[0])
-                {
-                    Int16 *pBuffer = (Int16*)pOutputBuffer;
-                    for(Int32 i = 0; i < framesIn.Length; i++)
-                    {
-                        pBuffer[index] = (Int16)(framesIn[i] * Int16.MaxValue);
-                        index++;
-                    }
-                }
-            }
-
-            stream.Write(outputBuffer, 0, (Int32)byteSize);
-
-            bytesWritten += byteSize;
+            state = State.WriteData;
         }
 
         private void WriteData(NativeArray<Int16> framesIn, UInt32 frameCount)
         {
-            if(GetState() != State.WriteData)
+            if (state != State.WriteData)
+            {
                 return;
+            }
 
-            if(stream == null)
+            if (stream == null)
+            {
                 return;
+            }
 
             UInt32 byteSize = (UInt32)(framesIn.Length * sizeof(Int16));
 
@@ -278,20 +260,75 @@ namespace MiniAudioEx.Utilities
             bytesWritten += byteSize;
         }
 
+        private void WriteData(NativeArray<float> framesIn, UInt32 frameCount)
+        {
+            if (state != State.WriteData)
+            {
+                return;
+            }
+
+            if (stream == null)
+            {
+                return;
+            }
+
+            UInt32 byteSize = (UInt32)(framesIn.Length * sizeof(Int16));
+
+            if (byteSize == 0)
+            {
+                return;
+            }
+
+            if (outputBuffer.Length < byteSize)
+            {
+                outputBuffer = new byte[byteSize];
+            }
+
+            Int32 index = 0;
+
+            unsafe
+            {
+                fixed (byte* pOutputBuffer = &outputBuffer[0])
+                {
+                    Int16* pBuffer = (Int16*)pOutputBuffer;
+                    for (Int32 i = 0; i < framesIn.Length; i++)
+                    {
+                        pBuffer[index] = (Int16)(framesIn[i] * Int16.MaxValue);
+                        index++;
+                    }
+                }
+            }
+
+            stream.Write(outputBuffer, 0, (Int32)byteSize);
+            bytesWritten += byteSize;
+        }
+
         private void CloseFile()
         {
-            if(stream != null)
+            if (state == State.Idle)
             {
-                if(bytesWritten > 0)
+                return;
+            }
+
+            state = State.CloseFile;
+
+            if (stream != null)
+            {
+                if (bytesWritten > 0)
                 {
                     const Int32 headerSize = 44;
-                    Int32 chunkSize = headerSize + (Int32)(bytesWritten - 8);//file size - 8;
+                    Int32 chunkSize = headerSize + (Int32)(bytesWritten - 8);
                     Int32 subChunk2Size = (Int32)bytesWritten;
+
+                    if (outputBuffer.Length < sizeof(Int32))
+                    {
+                        outputBuffer = new byte[sizeof(Int32)];
+                    }
 
                     WriteInt32(chunkSize, outputBuffer, 0);
                     stream.Seek(4, SeekOrigin.Begin);
                     stream.Write(outputBuffer, 0, sizeof(Int32));
-                    
+
                     WriteInt32(subChunk2Size, outputBuffer, 0);
                     stream.Seek(40, SeekOrigin.Begin);
                     stream.Write(outputBuffer, 0, sizeof(Int32));
@@ -303,12 +340,12 @@ namespace MiniAudioEx.Utilities
                 stream = null;
             }
 
-            SetState(State.Idle);
+            state = State.Idle;
         }
 
         private unsafe void WriteInt16(Int16 value, byte[] buffer, Int32 offset)
         {
-            fixed(byte *dst = &buffer[offset])
+            fixed (byte* dst = &buffer[offset])
             {
                 byte* src = (byte*)&value;
                 Buffer.MemoryCopy(src, dst, sizeof(Int16), sizeof(Int16));
@@ -317,11 +354,11 @@ namespace MiniAudioEx.Utilities
 
         private unsafe void WriteInt32(Int32 value, byte[] buffer, Int32 offset)
         {
-            fixed(byte *dst = &buffer[offset])
+            fixed (byte* dst = &buffer[offset])
             {
                 byte* src = (byte*)&value;
                 Buffer.MemoryCopy(src, dst, sizeof(Int32), sizeof(Int32));
             }
         }
-	}
+    }
 }

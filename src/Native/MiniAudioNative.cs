@@ -107,7 +107,7 @@ namespace MiniAudioEx.Native
         private const string LIB_MINIAUDIO_EX = "miniaudioex";
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the number of bytes per sample for the given audio format.
+        /// Retrieves the number of bytes per sample for the given audio format.
         /// </summary>
         /// <param name="format">The audio format to query.</param>
         /// <returns>The number of bytes per sample for the specified format.</returns>
@@ -127,7 +127,7 @@ namespace MiniAudioEx.Native
         }
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Allocates memory for a structure of the given allocation type.
+        /// Allocates memory for a structure of the given allocation type.
         /// </summary>
         /// <param name="type">The allocation type that determines the size of the allocated memory block.</param>
         /// <returns>A pointer to the allocated memory, or IntPtr.Zero if allocation fails.</returns>
@@ -135,7 +135,7 @@ namespace MiniAudioEx.Native
         public static extern IntPtr ma_allocate_type(ma_allocation_type type);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Allocates a block of memory of the specified size.
+        /// Allocates a block of memory of the specified size.
         /// </summary>
         /// <param name="size">The number of bytes to allocate.</param>
         /// <returns>A pointer to the allocated memory, or IntPtr.Zero if allocation fails.</returns>
@@ -143,14 +143,14 @@ namespace MiniAudioEx.Native
         public static extern IntPtr ma_allocate(size_t size);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Frees memory previously allocated with ma_allocate_type.
+        /// Frees memory previously allocated with ma_allocate_type.
         /// </summary>
         /// <param name="pData">A pointer to the memory block to free.</param>
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ma_deallocate_type(IntPtr pData);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the size in bytes of the structure associated with the given allocation type.
+        /// Retrieves the size in bytes of the structure associated with the given allocation type.
         /// </summary>
         /// <param name="type">The allocation type to query.</param>
         /// <returns>The size in bytes of the structure for the specified allocation type.</returns>
@@ -158,7 +158,7 @@ namespace MiniAudioEx.Native
         public static extern size_t ma_get_size_of_type(ma_allocation_type type);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Initializes and returns an engine configuration with default settings.
+        /// Initializes and returns an engine configuration with default settings.
         /// </summary>
         /// <returns>A default-initialized engine configuration structure.</returns>
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
@@ -166,7 +166,7 @@ namespace MiniAudioEx.Native
 
         // ma_device
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Initializes a device configuration structure with default settings for the given device type.
+        /// Initializes a device configuration structure with default settings for the given device type.
         /// </summary>
         /// <param name="deviceType">The type of device (playback, capture, duplex, or loopback).</param>
         /// <returns>A default-initialized device configuration.</returns>
@@ -174,7 +174,7 @@ namespace MiniAudioEx.Native
         public static extern ma_device_config ma_device_config_init(ma_device_type deviceType);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Initializes a device with the given context and configuration.
+        /// Initializes a device with the given context and configuration.
         /// </summary>
         /// <param name="pContext">A pointer to the initialized context that will own the device.</param>
         /// <param name="pConfig">The device configuration.</param>
@@ -184,14 +184,14 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_device_init(ma_context_ptr pContext, ref ma_device_config pConfig, ma_device_ptr pDevice);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Uninitializes a previously initialized device, releasing its resources.
+        /// Uninitializes a previously initialized device, releasing its resources.
         /// </summary>
         /// <param name="pDevice">A pointer to the device to uninitialize.</param>
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ma_device_uninit(ma_device_ptr pDevice);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the context that owns this device.
+        /// Retrieves the context that owns this device.
         /// </summary>
         /// <param name="pDevice">A pointer to the device.</param>
         /// <returns>A pointer to the context that owns the device.</returns>
@@ -199,7 +199,7 @@ namespace MiniAudioEx.Native
         public static extern ma_context_ptr ma_device_get_context(ma_device_ptr pDevice);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Starts the device, beginning audio processing.
+        /// Starts the device, beginning audio processing.
         /// </summary>
         /// <param name="pDevice">A pointer to the device to start.</param>
         /// <returns>MA_SUCCESS if the device was started successfully, otherwise an error code.</returns>
@@ -207,7 +207,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_device_start(ma_device_ptr pDevice);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Stops the device, halting audio processing.
+        /// Stops the device, halting audio processing.
         /// </summary>
         /// <param name="pDevice">A pointer to the device to stop.</param>
         /// <returns>MA_SUCCESS if the device was stopped successfully, otherwise an error code.</returns>
@@ -215,7 +215,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_device_stop(ma_device_ptr pDevice);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Queries whether the device has been started.
+        /// Queries whether the device has been started.
         /// </summary>
         /// <param name="pDevice">A pointer to the device to query.</param>
         /// <returns>MA_TRUE if the device is started, otherwise MA_FALSE.</returns>
@@ -223,7 +223,7 @@ namespace MiniAudioEx.Native
         public static extern ma_bool32 ma_device_is_started(ma_device_ptr pDevice);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the current state of the device.
+        /// Retrieves the current state of the device.
         /// </summary>
         /// <param name="pDevice">A pointer to the device to query.</param>
         /// <returns>The current device state (started, stopped, starting, or stopping).</returns>
@@ -231,7 +231,7 @@ namespace MiniAudioEx.Native
         public static extern ma_device_state ma_device_get_state(ma_device_ptr pDevice);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Sets the master volume of the device on a linear scale.
+        /// Sets the master volume of the device on a linear scale.
         /// </summary>
         /// <param name="pDevice">A pointer to the device.</param>
         /// <param name="volume">The linear volume level, where 1.0 is the default.</param>
@@ -240,7 +240,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_device_set_master_volume(ma_device_ptr pDevice, float volume);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the current master volume of the device on a linear scale.
+        /// Retrieves the current master volume of the device on a linear scale.
         /// </summary>
         /// <param name="pDevice">A pointer to the device.</param>
         /// <param name="pVolume">Receives the current linear volume level.</param>
@@ -249,7 +249,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_device_get_master_volume(ma_device_ptr pDevice, out float pVolume);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Sets the master volume of the device in decibels.
+        /// Sets the master volume of the device in decibels.
         /// </summary>
         /// <param name="pDevice">A pointer to the device.</param>
         /// <param name="gainDB">The volume level in decibels, where 0 is the default.</param>
@@ -258,7 +258,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_device_set_master_volume_db(ma_device_ptr pDevice, float gainDB);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the current master volume of the device in decibels.
+        /// Retrieves the current master volume of the device in decibels.
         /// </summary>
         /// <param name="pDevice">A pointer to the device.</param>
         /// <param name="pGainDB">Receives the current volume level in decibels.</param>
@@ -267,7 +267,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_device_get_master_volume_db(ma_device_ptr pDevice, out float pGainDB);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Manually processes backend-level data for the device, used when the device is not started automatically.
+        /// Manually processes backend-level data for the device, used when the device is not started automatically.
         /// </summary>
         /// <param name="pDevice">A pointer to the device.</param>
         /// <param name="pOutput">A pointer to the output buffer that will receive the processed audio data.</param>
@@ -278,7 +278,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_device_handle_backend_data_callback(ma_device_ptr pDevice, IntPtr pOutput, IntPtr pInput, ma_uint32 frameCount);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves a pointer to the device's resampling configuration.
+        /// Retrieves a pointer to the device's resampling configuration.
         /// </summary>
         /// <param name="pDevice">A pointer to the device.</param>
         /// <returns>A pointer to the resampling data of the device.</returns>
@@ -286,7 +286,7 @@ namespace MiniAudioEx.Native
         public static extern ma_device_resampling_ptr ma_device_get_resampling(ma_device_ptr pDevice);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves a pointer to the device's playback configuration and state.
+        /// Retrieves a pointer to the device's playback configuration and state.
         /// </summary>
         /// <param name="pDevice">A pointer to the device.</param>
         /// <returns>A pointer to the playback data of the device.</returns>
@@ -294,7 +294,7 @@ namespace MiniAudioEx.Native
         public static extern ma_device_playback_ptr ma_device_get_playback(ma_device_ptr pDevice);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves a pointer to the device's capture configuration and state.
+        /// Retrieves a pointer to the device's capture configuration and state.
         /// </summary>
         /// <param name="pDevice">A pointer to the device.</param>
         /// <returns>A pointer to the capture data of the device.</returns>
@@ -303,14 +303,14 @@ namespace MiniAudioEx.Native
 
         // ma_context
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Initializes and returns a context configuration structure with default settings.
+        /// Initializes and returns a context configuration structure with default settings.
         /// </summary>
         /// <returns>A default-initialized context configuration.</returns>
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
         public static extern ma_context_config ma_context_config_init();
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_context_init(ma_backend* backends, ma_uint32 backendCount, ma_context_config* pConfig, ma_context_ptr pContext);
+        internal static extern unsafe ma_result ma_context_init(ma_backend* backends, ma_uint32 backendCount, ma_context_config* pConfig, ma_context_ptr pContext);
 
         /// <summary>
         /// Managed helper that initializes a context with the specified backend array and custom configuration. Calls the native ma_context_init function.
@@ -359,7 +359,7 @@ namespace MiniAudioEx.Native
         }
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Uninitializes a previously initialized context, releasing its resources.
+        /// Uninitializes a previously initialized context, releasing its resources.
         /// </summary>
         /// <param name="pContext">A pointer to the context to uninitialize.</param>
         /// <returns>MA_SUCCESS if the context was uninitialized successfully, otherwise an error code.</returns>
@@ -367,14 +367,14 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_context_uninit(ma_context_ptr pContext);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Returns the size in bytes of the context structure.
+        /// Returns the size in bytes of the context structure.
         /// </summary>
         /// <returns>The size of the context structure in bytes.</returns>
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
         public static extern size_t ma_context_sizeof();
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves a pointer to the log instance associated with the context.
+        /// Retrieves a pointer to the log instance associated with the context.
         /// </summary>
         /// <param name="pContext">A pointer to the context.</param>
         /// <returns>A pointer to the log instance of the context.</returns>
@@ -382,7 +382,7 @@ namespace MiniAudioEx.Native
         public static extern ma_log_ptr ma_context_get_log(ma_context_ptr pContext);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern ma_result ma_context_enumerate_devices(ma_context_ptr pContext, IntPtr callback, IntPtr pUserData);
+        internal static extern ma_result ma_context_enumerate_devices(ma_context_ptr pContext, IntPtr callback, IntPtr pUserData);
 
         /// <summary>
         /// Managed helper that enumerates available audio devices, invoking the provided callback for each device found.
@@ -397,7 +397,7 @@ namespace MiniAudioEx.Native
         }
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_context_get_devices(ma_context_ptr pContext, ma_device_info** ppPlaybackDeviceInfos, ma_uint32* pPlaybackDeviceCount, ma_device_info** ppCaptureDeviceInfos, ma_uint32* pCaptureDeviceCount);
+        internal static extern unsafe ma_result ma_context_get_devices(ma_context_ptr pContext, ma_device_info** ppPlaybackDeviceInfos, ma_uint32* pPlaybackDeviceCount, ma_device_info** ppCaptureDeviceInfos, ma_uint32* pCaptureDeviceCount);
 
         /// <summary>
         /// Managed helper that retrieves arrays of playback and capture device information for the given context.
@@ -445,7 +445,7 @@ namespace MiniAudioEx.Native
         }
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves detailed information about a specific audio device.
+        /// Retrieves detailed information about a specific audio device.
         /// </summary>
         /// <param name="pContext">A pointer to the context.</param>
         /// <param name="deviceType">The type of device to query (playback or capture).</param>
@@ -456,7 +456,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_context_get_device_info(ma_context_ptr pContext, ma_device_type deviceType, ma_device_id_ptr pDeviceID, out ma_device_info pDeviceInfo);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Queries whether loopback audio capture is supported by the current backend.
+        /// Queries whether loopback audio capture is supported by the current backend.
         /// </summary>
         /// <param name="pContext">A pointer to the context.</param>
         /// <returns>MA_TRUE if loopback is supported, otherwise MA_FALSE.</returns>
@@ -465,14 +465,14 @@ namespace MiniAudioEx.Native
 
         // ma_engine
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Uninitializes a previously initialized engine, releasing its resources.
+        /// Uninitializes a previously initialized engine, releasing its resources.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine to uninitialize.</param>
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ma_engine_uninit(ma_engine_ptr pEngine);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Initializes an engine with the given configuration.
+        /// Initializes an engine with the given configuration.
         /// </summary>
         /// <param name="pConfig">The engine configuration, typically obtained from ma_engine_config_init.</param>
         /// <param name="pEngine">A pointer to the uninitialized engine structure.</param>
@@ -492,7 +492,7 @@ namespace MiniAudioEx.Native
         }
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_engine_read_pcm_frames(ma_engine_ptr pEngine, IntPtr pFramesOut, ma_uint64 frameCount, ma_uint64* pFramesRead);
+        internal static extern unsafe ma_result ma_engine_read_pcm_frames(ma_engine_ptr pEngine, IntPtr pFramesOut, ma_uint64 frameCount, ma_uint64* pFramesRead);
 
         /// <summary>
         /// Managed helper that reads PCM frames from the engine's output, reporting the number of frames actually read.
@@ -523,7 +523,7 @@ namespace MiniAudioEx.Native
         }
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves a pointer to the engine's internal node graph.
+        /// Retrieves a pointer to the engine's internal node graph.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <returns>A pointer to the node graph of the engine.</returns>
@@ -531,7 +531,7 @@ namespace MiniAudioEx.Native
         public static extern ma_node_graph_ptr ma_engine_get_node_graph(ma_engine_ptr pEngine);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves a pointer to the engine's resource manager.
+        /// Retrieves a pointer to the engine's resource manager.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <returns>A pointer to the resource manager of the engine.</returns>
@@ -539,7 +539,7 @@ namespace MiniAudioEx.Native
         public static extern ma_resource_manager_ptr ma_engine_get_resource_manager(ma_engine_ptr pEngine);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves a pointer to the audio device bound to the engine.
+        /// Retrieves a pointer to the audio device bound to the engine.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <returns>A pointer to the device owned by the engine.</returns>
@@ -547,7 +547,7 @@ namespace MiniAudioEx.Native
         public static extern ma_device_ptr ma_engine_get_device(ma_engine_ptr pEngine);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves a pointer to the engine's log instance.
+        /// Retrieves a pointer to the engine's log instance.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <returns>A pointer to the log instance of the engine.</returns>
@@ -555,7 +555,7 @@ namespace MiniAudioEx.Native
         public static extern ma_log_ptr ma_engine_get_log(ma_engine_ptr pEngine);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves a pointer to the engine's endpoint node, which is the final node in the audio graph.
+        /// Retrieves a pointer to the engine's endpoint node, which is the final node in the audio graph.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <returns>A pointer to the endpoint node of the engine's node graph.</returns>
@@ -563,7 +563,7 @@ namespace MiniAudioEx.Native
         public static extern ma_node_ptr ma_engine_get_endpoint(ma_engine_ptr pEngine);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the current global time of the engine in PCM frames.
+        /// Retrieves the current global time of the engine in PCM frames.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <returns>The current global time in PCM frames.</returns>
@@ -571,7 +571,7 @@ namespace MiniAudioEx.Native
         public static extern ma_uint64 ma_engine_get_time_in_pcm_frames(ma_engine_ptr pEngine);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the current global time of the engine in milliseconds.
+        /// Retrieves the current global time of the engine in milliseconds.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <returns>The current global time in milliseconds.</returns>
@@ -579,7 +579,7 @@ namespace MiniAudioEx.Native
         public static extern ma_uint64 ma_engine_get_time_in_milliseconds(ma_engine_ptr pEngine);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Sets the current global time of the engine in PCM frames.
+        /// Sets the current global time of the engine in PCM frames.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="globalTime">The new global time in PCM frames.</param>
@@ -588,7 +588,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_engine_set_time_in_pcm_frames(ma_engine_ptr pEngine, ma_uint64 globalTime);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Sets the current global time of the engine in milliseconds.
+        /// Sets the current global time of the engine in milliseconds.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="globalTime">The new global time in milliseconds.</param>
@@ -597,7 +597,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_engine_set_time_in_milliseconds(ma_engine_ptr pEngine, ma_uint64 globalTime);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the number of audio channels configured for the engine.
+        /// Retrieves the number of audio channels configured for the engine.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <returns>The number of channels.</returns>
@@ -605,7 +605,7 @@ namespace MiniAudioEx.Native
         public static extern ma_uint32 ma_engine_get_channels(ma_engine_ptr pEngine);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the sample rate configured for the engine.
+        /// Retrieves the sample rate configured for the engine.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <returns>The sample rate in Hz.</returns>
@@ -613,7 +613,7 @@ namespace MiniAudioEx.Native
         public static extern ma_uint32 ma_engine_get_sample_rate(ma_engine_ptr pEngine);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Starts the engine's audio device, beginning audio processing.
+        /// Starts the engine's audio device, beginning audio processing.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine to start.</param>
         /// <returns>MA_SUCCESS if the engine was started, otherwise an error code.</returns>
@@ -621,7 +621,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_engine_start(ma_engine_ptr pEngine);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Stops the engine's audio device, halting audio processing.
+        /// Stops the engine's audio device, halting audio processing.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine to stop.</param>
         /// <returns>MA_SUCCESS if the engine was stopped, otherwise an error code.</returns>
@@ -629,7 +629,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_engine_stop(ma_engine_ptr pEngine);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Sets the master volume of the engine on a linear scale.
+        /// Sets the master volume of the engine on a linear scale.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="volume">The linear volume level, where 1.0 is the default.</param>
@@ -638,7 +638,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_engine_set_volume(ma_engine_ptr pEngine, float volume);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the current master volume of the engine on a linear scale.
+        /// Retrieves the current master volume of the engine on a linear scale.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <returns>The current linear volume level.</returns>
@@ -646,7 +646,7 @@ namespace MiniAudioEx.Native
         public static extern float ma_engine_get_volume(ma_engine_ptr pEngine);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Sets the master volume of the engine in decibels.
+        /// Sets the master volume of the engine in decibels.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="gainDB">The volume level in decibels, where 0 is the default.</param>
@@ -655,7 +655,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_engine_set_gain_db(ma_engine_ptr pEngine, float gainDB);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the current master volume of the engine in decibels.
+        /// Retrieves the current master volume of the engine in decibels.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <returns>The current volume level in decibels.</returns>
@@ -663,7 +663,7 @@ namespace MiniAudioEx.Native
         public static extern float ma_engine_get_gain_db(ma_engine_ptr pEngine);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the number of spatial audio listeners active in the engine.
+        /// Retrieves the number of spatial audio listeners active in the engine.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <returns>The number of active listeners.</returns>
@@ -671,7 +671,7 @@ namespace MiniAudioEx.Native
         public static extern ma_uint32 ma_engine_get_listener_count(ma_engine_ptr pEngine);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Finds the index of the listener closest to the specified absolute position.
+        /// Finds the index of the listener closest to the specified absolute position.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="absolutePosX">The X coordinate of the position to test.</param>
@@ -682,7 +682,7 @@ namespace MiniAudioEx.Native
         public static extern ma_uint32 ma_engine_find_closest_listener(ma_engine_ptr pEngine, float absolutePosX, float absolutePosY, float absolutePosZ);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Sets the position of a spatial audio listener in 3D space.
+        /// Sets the position of a spatial audio listener in 3D space.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="listenerIndex">The index of the listener to modify.</param>
@@ -693,7 +693,7 @@ namespace MiniAudioEx.Native
         public static extern void ma_engine_listener_set_position(ma_engine_ptr pEngine, ma_uint32 listenerIndex, float x, float y, float z);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the position of a spatial audio listener.
+        /// Retrieves the position of a spatial audio listener.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="listenerIndex">The index of the listener to query.</param>
@@ -702,7 +702,7 @@ namespace MiniAudioEx.Native
         public static extern ma_vec3f ma_engine_listener_get_position(ma_engine_ptr pEngine, ma_uint32 listenerIndex);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Sets the direction vector of a spatial audio listener.
+        /// Sets the direction vector of a spatial audio listener.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="listenerIndex">The index of the listener to modify.</param>
@@ -713,7 +713,7 @@ namespace MiniAudioEx.Native
         public static extern void ma_engine_listener_set_direction(ma_engine_ptr pEngine, ma_uint32 listenerIndex, float x, float y, float z);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the direction vector of a spatial audio listener.
+        /// Retrieves the direction vector of a spatial audio listener.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="listenerIndex">The index of the listener to query.</param>
@@ -722,7 +722,7 @@ namespace MiniAudioEx.Native
         public static extern ma_vec3f ma_engine_listener_get_direction(ma_engine_ptr pEngine, ma_uint32 listenerIndex);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Sets the velocity vector of a spatial audio listener for Doppler effect calculation.
+        /// Sets the velocity vector of a spatial audio listener for Doppler effect calculation.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="listenerIndex">The index of the listener to modify.</param>
@@ -733,7 +733,7 @@ namespace MiniAudioEx.Native
         public static extern void ma_engine_listener_set_velocity(ma_engine_ptr pEngine, ma_uint32 listenerIndex, float x, float y, float z);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the velocity vector of a spatial audio listener.
+        /// Retrieves the velocity vector of a spatial audio listener.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="listenerIndex">The index of the listener to query.</param>
@@ -742,7 +742,7 @@ namespace MiniAudioEx.Native
         public static extern ma_vec3f ma_engine_listener_get_velocity(ma_engine_ptr pEngine, ma_uint32 listenerIndex);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Sets the cone parameters for a spatial audio listener, defining directional attenuation.
+        /// Sets the cone parameters for a spatial audio listener, defining directional attenuation.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="listenerIndex">The index of the listener to modify.</param>
@@ -753,7 +753,7 @@ namespace MiniAudioEx.Native
         public static extern void ma_engine_listener_set_cone(ma_engine_ptr pEngine, ma_uint32 listenerIndex, float innerAngleInRadians, float outerAngleInRadians, float outerGain);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the cone parameters for a spatial audio listener.
+        /// Retrieves the cone parameters for a spatial audio listener.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="listenerIndex">The index of the listener to query.</param>
@@ -764,7 +764,7 @@ namespace MiniAudioEx.Native
         public static extern void ma_engine_listener_get_cone(ma_engine_ptr pEngine, ma_uint32 listenerIndex, out float pInnerAngleInRadians, out float pOuterAngleInRadians, out float pOuterGain);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Sets the world-up vector for a spatial audio listener.
+        /// Sets the world-up vector for a spatial audio listener.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="listenerIndex">The index of the listener to modify.</param>
@@ -775,7 +775,7 @@ namespace MiniAudioEx.Native
         public static extern void ma_engine_listener_set_world_up(ma_engine_ptr pEngine, ma_uint32 listenerIndex, float x, float y, float z);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Retrieves the world-up vector for a spatial audio listener.
+        /// Retrieves the world-up vector for a spatial audio listener.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="listenerIndex">The index of the listener to query.</param>
@@ -784,7 +784,7 @@ namespace MiniAudioEx.Native
         public static extern ma_vec3f ma_engine_listener_get_world_up(ma_engine_ptr pEngine, ma_uint32 listenerIndex);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Enables or disables a spatial audio listener.
+        /// Enables or disables a spatial audio listener.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="listenerIndex">The index of the listener to modify.</param>
@@ -793,7 +793,7 @@ namespace MiniAudioEx.Native
         public static extern void ma_engine_listener_set_enabled(ma_engine_ptr pEngine, ma_uint32 listenerIndex, ma_bool32 isEnabled);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Queries whether a spatial audio listener is enabled.
+        /// Queries whether a spatial audio listener is enabled.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="listenerIndex">The index of the listener to query.</param>
@@ -802,7 +802,7 @@ namespace MiniAudioEx.Native
         public static extern ma_bool32 ma_engine_listener_is_enabled(ma_engine_ptr pEngine, ma_uint32 listenerIndex);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Plays a sound file from the given path, attaching it to a specific node and input bus.
+        /// Plays a sound file from the given path, attaching it to a specific node and input bus.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="pFilePath">The file path of the audio file to play.</param>
@@ -813,7 +813,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_engine_play_sound_ex(ma_engine_ptr pEngine, string pFilePath, ma_node_ptr pNode, ma_uint32 nodeInputBusIndex);
 
         /// <summary>
-        /// Native function wrapper for the miniaudioex C API. Plays a sound file in a fire-and-forget manner. The returned sound is attached to the engine's endpoint and begins playing immediately.
+        /// Plays a sound file in a fire-and-forget manner. The returned sound is attached to the engine's endpoint and begins playing immediately.
         /// </summary>
         /// <param name="pEngine">A pointer to the engine.</param>
         /// <param name="pFilePath">The file path of the audio file to play.</param>
@@ -1725,7 +1725,7 @@ namespace MiniAudioEx.Native
 
         // ma_procedural_data_source
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern ma_procedural_data_source_config ma_procedural_data_source_config_init(ma_format format, ma_uint32 channels, ma_uint32 sampleRate, IntPtr pProceduralSoundProc, IntPtr pUserData);
+        internal static extern ma_procedural_data_source_config ma_procedural_data_source_config_init(ma_format format, ma_uint32 channels, ma_uint32 sampleRate, IntPtr pProceduralSoundProc, IntPtr pUserData);
 
         /// <summary>Initializes a procedural data source configuration for generating audio programmatically.</summary>
         /// <param name="format">The sample format (e.g. f32, s16).</param>
@@ -2150,7 +2150,7 @@ namespace MiniAudioEx.Native
         public static extern ma_decoder_config ma_decoder_config_init_default();
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern ma_result ma_decoder_init(IntPtr onRead, IntPtr onSeek, IntPtr pUserData, ref ma_decoder_config pConfig, ma_decoder_ptr pDecoder);
+        internal static extern ma_result ma_decoder_init(IntPtr onRead, IntPtr onSeek, IntPtr pUserData, ref ma_decoder_config pConfig, ma_decoder_ptr pDecoder);
 
         /// <summary>
         /// Initializes a decoder from custom read and seek callbacks.
@@ -2215,7 +2215,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_decoder_uninit(ma_decoder_ptr pDecoder);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_decoder_read_pcm_frames(ma_decoder_ptr pDecoder, IntPtr pFramesOut, ma_uint64 frameCount, ma_uint64* pFramesRead);
+        internal static extern unsafe ma_result ma_decoder_read_pcm_frames(ma_decoder_ptr pDecoder, IntPtr pFramesOut, ma_uint64 frameCount, ma_uint64* pFramesRead);
 
         /// <summary>
         /// Reads raw PCM frames from the decoder. Returns the number of frames actually read via pFramesRead.
@@ -2387,7 +2387,7 @@ namespace MiniAudioEx.Native
 
         // ma_log
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern ma_log_callback ma_log_callback_init(IntPtr onLog, IntPtr pUserData);
+        internal static extern ma_log_callback ma_log_callback_init(IntPtr onLog, IntPtr pUserData);
 
         /// <summary>
         /// Initializes a log callback with the specified callback function and user data.
@@ -2398,7 +2398,7 @@ namespace MiniAudioEx.Native
         }
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_log_init(ma_allocation_callbacks* pAllocationCallbacks, ma_log_ptr pLog);
+        internal static extern unsafe ma_result ma_log_init(ma_allocation_callbacks* pAllocationCallbacks, ma_log_ptr pLog);
 
         /// <summary>
         /// Initializes a log object with default allocation callbacks.
@@ -2463,7 +2463,7 @@ namespace MiniAudioEx.Native
         public static extern ma_node_graph_config ma_node_graph_config_init(ma_uint32 channels);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_node_graph_init(ref ma_node_graph_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_node_graph_ptr pNodeGraph);
+        internal static extern unsafe ma_result ma_node_graph_init(ref ma_node_graph_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_node_graph_ptr pNodeGraph);
 
         /// <summary>
         /// Initializes a node graph with custom allocation callbacks. The node graph manages the processing graph of connected audio nodes.
@@ -2491,7 +2491,7 @@ namespace MiniAudioEx.Native
         }
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_node_graph_uninit(ma_node_graph_ptr pNodeGraph, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_node_graph_uninit(ma_node_graph_ptr pNodeGraph, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a node graph with custom allocation callbacks.
@@ -2574,7 +2574,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_node_init_preallocated(ma_node_graph_ptr pNodeGraph, ref ma_node_config pConfig, IntPtr pHeap, ma_node_ptr pNode);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_node_init(ma_node_graph_ptr pNodeGraph, ref ma_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_node_ptr pNode);
+        internal static extern unsafe ma_result ma_node_init(ma_node_graph_ptr pNodeGraph, ref ma_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_node_ptr pNode);
 
         /// <summary>
         /// Initializes a node within a node graph with custom allocation callbacks.
@@ -2602,7 +2602,7 @@ namespace MiniAudioEx.Native
         }
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_node_uninit(ma_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_node_uninit(ma_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a node with custom allocation callbacks.
@@ -2750,7 +2750,7 @@ namespace MiniAudioEx.Native
         }
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_effect_node_init(ma_node_graph_ptr pNodeGraph, ref ma_effect_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_effect_node_ptr pEffectNode);
+        internal static extern unsafe ma_result ma_effect_node_init(ma_node_graph_ptr pNodeGraph, ref ma_effect_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_effect_node_ptr pEffectNode);
 
         /// <summary>
         /// Initializes an effect node within a node graph. The effect node uses a custom callback for audio processing.
@@ -2764,7 +2764,7 @@ namespace MiniAudioEx.Native
         }
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_effect_node_uninit(ma_effect_node_ptr pEffectNode, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_effect_node_uninit(ma_effect_node_ptr pEffectNode, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes an effect node and releases its resources.
@@ -2935,7 +2935,7 @@ namespace MiniAudioEx.Native
         public static extern ma_data_source_node_config ma_data_source_node_config_init(ma_data_source_ptr pDataSource);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_data_source_node_init(ma_node_graph_ptr pNodeGraph, ref ma_data_source_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_data_source_node_ptr pDataSourceNode);
+        internal static extern unsafe ma_result ma_data_source_node_init(ma_node_graph_ptr pNodeGraph, ref ma_data_source_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_data_source_node_ptr pDataSourceNode);
 
         /// <summary>
         /// Initializes a data source node with custom allocation callbacks. Wraps a data source as a node in the audio graph.
@@ -2963,7 +2963,7 @@ namespace MiniAudioEx.Native
         }
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_data_source_node_uninit(ma_data_source_node_ptr pDataSourceNode, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_data_source_node_uninit(ma_data_source_node_ptr pDataSourceNode, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a data source node with custom allocation callbacks.
@@ -3163,7 +3163,7 @@ namespace MiniAudioEx.Native
         public static extern ma_encoder_config ma_encoder_config_init(ma_encoding_format encodingFormat, ma_format format, ma_uint32 channels, ma_uint32 sampleRate);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern ma_result ma_encoder_init(IntPtr onWrite, IntPtr onSeek, IntPtr pUserData, ref ma_encoder_config pConfig, ma_encoder_ptr pEncoder);
+        internal static extern ma_result ma_encoder_init(IntPtr onWrite, IntPtr onSeek, IntPtr pUserData, ref ma_encoder_config pConfig, ma_encoder_ptr pEncoder);
 
         /// <summary>
         /// Initializes an encoder with custom write and seek callbacks.
@@ -3229,7 +3229,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_biquad_init_preallocated(ref ma_biquad_config pConfig, IntPtr pHeap, ma_biquad_ptr pBQ);
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_biquad_init(ref ma_biquad_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_biquad_ptr pBQ);
+        internal static extern unsafe ma_result ma_biquad_init(ref ma_biquad_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_biquad_ptr pBQ);
 
         /// <summary>
         /// Initializes a biquad filter with custom allocation callbacks.
@@ -3257,7 +3257,7 @@ namespace MiniAudioEx.Native
         }
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_biquad_uninit(ma_biquad_ptr pBQ, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_biquad_uninit(ma_biquad_ptr pBQ, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a biquad filter with custom allocation callbacks.
@@ -3333,7 +3333,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_lpf1_init_preallocated(ref ma_lpf1_config pConfig, IntPtr pHeap, ma_lpf1_ptr pLPF);
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_lpf1_init(ref ma_lpf1_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_lpf1_ptr pLPF);
+        internal static extern unsafe ma_result ma_lpf1_init(ref ma_lpf1_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_lpf1_ptr pLPF);
 
         /// <summary>
         /// Initializes a first-order low-pass filter with custom allocation callbacks.
@@ -3361,7 +3361,7 @@ namespace MiniAudioEx.Native
         }
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_lpf1_uninit(ma_lpf1_ptr pLPF, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_lpf1_uninit(ma_lpf1_ptr pLPF, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a first-order low-pass filter with custom allocation callbacks.
@@ -3425,7 +3425,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_lpf2_init_preallocated(ref ma_lpf2_config pConfig, IntPtr pHeap, ma_lpf2_ptr pHPF);
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_lpf2_init(ref ma_lpf2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_lpf2_ptr pLPF);
+        internal static extern unsafe ma_result ma_lpf2_init(ref ma_lpf2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_lpf2_ptr pLPF);
 
         /// <summary>
         /// Initializes a second-order low-pass filter with custom allocation callbacks.
@@ -3453,7 +3453,7 @@ namespace MiniAudioEx.Native
         }
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_lpf2_uninit(ma_lpf2_ptr pLPF, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_lpf2_uninit(ma_lpf2_ptr pLPF, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a second-order low-pass filter with custom allocation callbacks.
@@ -3523,7 +3523,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_lpf_init_preallocated(ref ma_lpf_config pConfig, IntPtr pHeap, ma_lpf_ptr pLPF);
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_lpf_init(ref ma_lpf_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_lpf_ptr pLPF);
+        internal static extern unsafe ma_result ma_lpf_init(ref ma_lpf_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_lpf_ptr pLPF);
 
         /// <summary>
         /// Initializes a configurable-order low-pass filter with custom allocation callbacks.
@@ -3551,7 +3551,7 @@ namespace MiniAudioEx.Native
         }
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_lpf_uninit(ma_lpf_ptr pLPF, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_lpf_uninit(ma_lpf_ptr pLPF, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a configurable-order low-pass filter with custom allocation callbacks.
@@ -3627,7 +3627,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_hpf1_init_preallocated(ref ma_hpf1_config pConfig, IntPtr pHeap, ma_hpf1_ptr pLPF);
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_hpf1_init(ref ma_hpf1_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hpf1_ptr pHPF);
+        internal static extern unsafe ma_result ma_hpf1_init(ref ma_hpf1_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hpf1_ptr pHPF);
 
         /// <summary>
         /// Initializes a first-order high-pass filter with custom allocation callbacks.
@@ -3655,7 +3655,7 @@ namespace MiniAudioEx.Native
         }
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_hpf1_uninit(ma_hpf1_ptr pHPF, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_hpf1_uninit(ma_hpf1_ptr pHPF, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a first-order high-pass filter with custom allocation callbacks.
@@ -3713,7 +3713,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_hpf2_init_preallocated(ref ma_hpf2_config pConfig, IntPtr pHeap, ma_hpf2_ptr pHPF);
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_hpf2_init(ref ma_hpf2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hpf2_ptr pHPF);
+        internal static extern unsafe ma_result ma_hpf2_init(ref ma_hpf2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hpf2_ptr pHPF);
 
         /// <summary>
         /// Initializes a second-order high-pass filter with custom allocation callbacks.
@@ -3741,7 +3741,7 @@ namespace MiniAudioEx.Native
         }
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_hpf2_uninit(ma_hpf2_ptr pHPF, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_hpf2_uninit(ma_hpf2_ptr pHPF, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a second-order high-pass filter with custom allocation callbacks.
@@ -3805,7 +3805,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_hpf_init_preallocated(ref ma_hpf_config pConfig, IntPtr pHeap, ma_hpf_ptr pLPF);
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_hpf_init(ref ma_hpf_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hpf_ptr pHPF);
+        internal static extern unsafe ma_result ma_hpf_init(ref ma_hpf_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hpf_ptr pHPF);
 
         /// <summary>
         /// Initializes a configurable-order high-pass filter with custom allocation callbacks.
@@ -3833,7 +3833,7 @@ namespace MiniAudioEx.Native
         }
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_hpf_uninit(ma_hpf_ptr pHPF, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_hpf_uninit(ma_hpf_ptr pHPF, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a configurable-order high-pass filter with custom allocation callbacks.
@@ -3897,7 +3897,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_bpf2_init_preallocated(ref ma_bpf2_config pConfig, IntPtr pHeap, ma_bpf2_ptr pBPF);
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_bpf2_init(ref ma_bpf2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_bpf2_ptr pBPF);
+        internal static extern unsafe ma_result ma_bpf2_init(ref ma_bpf2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_bpf2_ptr pBPF);
 
         /// <summary>
         /// Initializes a second-order band-pass filter with custom allocation callbacks.
@@ -3925,7 +3925,7 @@ namespace MiniAudioEx.Native
         }
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_bpf2_uninit(ma_bpf2_ptr pBPF, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_bpf2_uninit(ma_bpf2_ptr pBPF, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a second-order band-pass filter with custom allocation callbacks.
@@ -3989,7 +3989,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_bpf_init_preallocated(ref ma_bpf_config pConfig, IntPtr pHeap, ma_bpf_ptr pBPF);
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_bpf_init(ref ma_bpf_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_bpf_ptr pBPF);
+        internal static extern unsafe ma_result ma_bpf_init(ref ma_bpf_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_bpf_ptr pBPF);
 
         /// <summary>
         /// Initializes a configurable-order band-pass filter with custom allocation callbacks.
@@ -4017,7 +4017,7 @@ namespace MiniAudioEx.Native
         }
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_bpf_uninit(ma_bpf_ptr pBPF, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_bpf_uninit(ma_bpf_ptr pBPF, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a configurable-order band-pass filter with custom allocation callbacks.
@@ -4081,7 +4081,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_notch2_init_preallocated(ref ma_notch2_config pConfig, IntPtr pHeap, ma_notch2_ptr pFilter);
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_notch2_init(ref ma_notch2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_notch2_ptr pFilter);
+        internal static extern unsafe ma_result ma_notch2_init(ref ma_notch2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_notch2_ptr pFilter);
 
         /// <summary>
         /// Initializes a second-order notch filter with custom allocation callbacks.
@@ -4109,7 +4109,7 @@ namespace MiniAudioEx.Native
         }
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_notch2_uninit(ma_notch2_ptr pFilter, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_notch2_uninit(ma_notch2_ptr pFilter, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a second-order notch filter with custom allocation callbacks.
@@ -4173,7 +4173,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_peak2_init_preallocated(ref ma_peak2_config pConfig, IntPtr pHeap, ma_peak2_ptr pFilter);
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_peak2_init(ref ma_peak2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_peak2_ptr pFilter);
+        internal static extern unsafe ma_result ma_peak2_init(ref ma_peak2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_peak2_ptr pFilter);
 
         /// <summary>
         /// Initializes a second-order peaking EQ filter with custom allocation callbacks.
@@ -4201,7 +4201,7 @@ namespace MiniAudioEx.Native
         }
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_peak2_uninit(ma_peak2_ptr pFilter, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_peak2_uninit(ma_peak2_ptr pFilter, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a second-order peaking EQ filter with custom allocation callbacks.
@@ -4254,7 +4254,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_loshelf2_init_preallocated(ref ma_loshelf2_config pConfig, IntPtr pHeap, ma_loshelf2_ptr pFilter);
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_loshelf2_init(ref ma_loshelf2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_loshelf2_ptr pFilter);
+        internal static extern unsafe ma_result ma_loshelf2_init(ref ma_loshelf2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_loshelf2_ptr pFilter);
 
         /// <summary>
         /// Initializes a second-order low-shelf filter with custom allocation callbacks.
@@ -4282,7 +4282,7 @@ namespace MiniAudioEx.Native
         }
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_loshelf2_uninit(ma_loshelf2_ptr pFilter, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_loshelf2_uninit(ma_loshelf2_ptr pFilter, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a second-order low-shelf filter with custom allocation callbacks.
@@ -4346,7 +4346,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_hishelf2_init_preallocated(ref ma_hishelf2_config pConfig, IntPtr pHeap, ma_hishelf2_ptr pFilter);
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_hishelf2_init(ref ma_hishelf2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hishelf2_ptr pFilter);
+        internal static extern unsafe ma_result ma_hishelf2_init(ref ma_hishelf2_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hishelf2_ptr pFilter);
 
         /// <summary>
         /// Initializes a second-order high-shelf filter with custom allocation callbacks.
@@ -4374,7 +4374,7 @@ namespace MiniAudioEx.Native
         }
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_hishelf2_uninit(ma_hishelf2_ptr pFilter, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_hishelf2_uninit(ma_hishelf2_ptr pFilter, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a second-order high-shelf filter with custom allocation callbacks.
@@ -4426,7 +4426,7 @@ namespace MiniAudioEx.Native
         public static extern ma_lpf_node_config ma_lpf_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double cutoffFrequency, ma_uint32 order);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_lpf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_lpf_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_lpf_node_ptr pNode);
+        internal static extern unsafe ma_result ma_lpf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_lpf_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_lpf_node_ptr pNode);
 
         /// <summary>
         /// Initializes a low-pass filter node within a node graph with custom allocation callbacks.
@@ -4460,7 +4460,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_lpf_node_reinit(ref ma_lpf_config pConfig, ma_lpf_node_ptr pNode);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_lpf_node_uninit(ma_lpf_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_lpf_node_uninit(ma_lpf_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a low-pass filter node with custom allocation callbacks.
@@ -4494,7 +4494,7 @@ namespace MiniAudioEx.Native
         public static extern ma_hpf_node_config ma_hpf_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double cutoffFrequency, ma_uint32 order);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_hpf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_hpf_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hpf_node_ptr pNode);
+        internal static extern unsafe ma_result ma_hpf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_hpf_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hpf_node_ptr pNode);
 
         /// <summary>
         /// Initializes a high-pass filter node within a node graph with custom allocation callbacks.
@@ -4528,7 +4528,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_hpf_node_reinit(ref ma_hpf_config pConfig, ma_hpf_node_ptr pNode);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_hpf_node_uninit(ma_hpf_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_hpf_node_uninit(ma_hpf_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a high-pass filter node with custom allocation callbacks.
@@ -4562,7 +4562,7 @@ namespace MiniAudioEx.Native
         public static extern ma_bpf_node_config ma_bpf_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double cutoffFrequency, ma_uint32 order);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_bpf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_bpf_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_bpf_node_ptr pNode);
+        internal static extern unsafe ma_result ma_bpf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_bpf_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_bpf_node_ptr pNode);
 
         /// <summary>
         /// Initializes a band-pass filter node within a node graph with custom allocation callbacks.
@@ -4596,7 +4596,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_bpf_node_reinit(ref ma_bpf_config pConfig, ma_bpf_node_ptr pNode);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_bpf_node_uninit(ma_bpf_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_bpf_node_uninit(ma_bpf_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a band-pass filter node with custom allocation callbacks.
@@ -4630,7 +4630,7 @@ namespace MiniAudioEx.Native
         public static extern ma_notch_node_config ma_notch_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double q, double frequency);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_notch_node_init(ma_node_graph_ptr pNodeGraph, ref ma_notch_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_notch_node_ptr pNode);
+        internal static extern unsafe ma_result ma_notch_node_init(ma_node_graph_ptr pNodeGraph, ref ma_notch_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_notch_node_ptr pNode);
 
         /// <summary>
         /// Initializes a notch filter node within a node graph with custom allocation callbacks.
@@ -4664,7 +4664,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_notch_node_reinit(ref ma_notch_config pConfig, ma_notch_node_ptr pNode);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_notch_node_uninit(ma_notch_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_notch_node_uninit(ma_notch_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a notch filter node with custom allocation callbacks.
@@ -4698,7 +4698,7 @@ namespace MiniAudioEx.Native
         public static extern ma_peak_node_config ma_peak_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double gainDB, double q, double frequency);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_peak_node_init(ma_node_graph_ptr pNodeGraph, ref ma_peak_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_peak_node_ptr pNode);
+        internal static extern unsafe ma_result ma_peak_node_init(ma_node_graph_ptr pNodeGraph, ref ma_peak_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_peak_node_ptr pNode);
 
         /// <summary>
         /// Initializes a peaking EQ filter node within a node graph with custom allocation callbacks.
@@ -4732,7 +4732,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_peak_node_reinit(ref ma_peak_config pConfig, ma_peak_node_ptr pNode);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_peak_node_uninit(ma_peak_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_peak_node_uninit(ma_peak_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a peaking EQ filter node with custom allocation callbacks.
@@ -4766,7 +4766,7 @@ namespace MiniAudioEx.Native
         public static extern ma_loshelf_node_config ma_loshelf_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double gainDB, double q, double frequency);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_loshelf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_loshelf_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_loshelf_node_ptr pNode);
+        internal static extern unsafe ma_result ma_loshelf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_loshelf_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_loshelf_node_ptr pNode);
 
         /// <summary>
         /// Initializes a low-shelf filter node within a node graph with custom allocation callbacks.
@@ -4800,7 +4800,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_loshelf_node_reinit(ref ma_loshelf_config pConfig, ma_loshelf_node_ptr pNode);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_loshelf_node_uninit(ma_loshelf_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_loshelf_node_uninit(ma_loshelf_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a low-shelf filter node with custom allocation callbacks.
@@ -4834,7 +4834,7 @@ namespace MiniAudioEx.Native
         public static extern ma_hishelf_node_config ma_hishelf_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double gainDB, double q, double frequency);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_hishelf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_hishelf_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hishelf_node_ptr pNode);
+        internal static extern unsafe ma_result ma_hishelf_node_init(ma_node_graph_ptr pNodeGraph, ref ma_hishelf_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_hishelf_node_ptr pNode);
 
         /// <summary>
         /// Initializes a high-shelf filter node within a node graph with custom allocation callbacks.
@@ -4868,7 +4868,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_hishelf_node_reinit(ref ma_hishelf_config pConfig, ma_hishelf_node_ptr pNode);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_hishelf_node_uninit(ma_hishelf_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_hishelf_node_uninit(ma_hishelf_node_ptr pNode, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a high-shelf filter node with custom allocation callbacks.
@@ -4903,7 +4903,7 @@ namespace MiniAudioEx.Native
         public static extern ma_delay_config ma_delay_config_init(ma_uint32 channels, ma_uint32 sampleRate, ma_uint32 delayInFrames, float decay);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_delay_init(ref ma_delay_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_delay_ptr pDelay);
+        internal static extern unsafe ma_result ma_delay_init(ref ma_delay_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_delay_ptr pDelay);
 
         /// <summary>
         /// Initializes a delay effect with custom allocation callbacks.
@@ -4931,7 +4931,7 @@ namespace MiniAudioEx.Native
         }
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_delay_uninit(ma_delay_ptr pDelay, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_delay_uninit(ma_delay_ptr pDelay, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a delay effect with custom allocation callbacks.
@@ -5008,7 +5008,7 @@ namespace MiniAudioEx.Native
         public static extern ma_delay_node_config ma_delay_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, ma_uint32 delayInFrames, float decay);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_delay_node_init(ma_node_graph_ptr pNodeGraph, ref ma_delay_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_delay_node_ptr pDelayNode);
+        internal static extern unsafe ma_result ma_delay_node_init(ma_node_graph_ptr pNodeGraph, ref ma_delay_node_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_delay_node_ptr pDelayNode);
 
         /// <summary>
         /// Initializes a delay node within a node graph with custom allocation callbacks.
@@ -5036,7 +5036,7 @@ namespace MiniAudioEx.Native
         }
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_delay_node_uninit(ma_delay_node_ptr pDelayNode, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_delay_node_uninit(ma_delay_node_ptr pDelayNode, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a delay node with custom allocation callbacks.
@@ -5107,7 +5107,7 @@ namespace MiniAudioEx.Native
         public static extern ma_splitter_node_config ma_splitter_node_config_init(ma_uint32 channels);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_splitter_node_init(ma_node_graph_ptr pNodeGraph, ref ma_splitter_node_config pConfig, ma_allocation_callbacks *pAllocationCallbacks, ma_splitter_node_ptr pSplitterNode);
+        internal static extern unsafe ma_result ma_splitter_node_init(ma_node_graph_ptr pNodeGraph, ref ma_splitter_node_config pConfig, ma_allocation_callbacks *pAllocationCallbacks, ma_splitter_node_ptr pSplitterNode);
 
         /// <summary>
         /// Initializes a splitter node within a node graph with custom allocation callbacks.
@@ -5135,7 +5135,7 @@ namespace MiniAudioEx.Native
         }
         
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_splitter_node_uninit(ma_splitter_node_ptr pSplitterNode, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_splitter_node_uninit(ma_splitter_node_ptr pSplitterNode, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a splitter node with custom allocation callbacks.
@@ -5290,7 +5290,7 @@ namespace MiniAudioEx.Native
         public static extern ma_result ma_noise_init_preallocated(ref ma_noise_config pConfig, IntPtr pHeap, ma_noise_ptr pNoise);
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe ma_result ma_noise_init(ref ma_noise_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_noise_ptr pNoise);
+        internal static extern unsafe ma_result ma_noise_init(ref ma_noise_config pConfig, ma_allocation_callbacks* pAllocationCallbacks, ma_noise_ptr pNoise);
 
         /// <summary>
         /// Initializes a noise generator with custom allocation callbacks. Produces white, pink, or Brownian noise.
@@ -5318,7 +5318,7 @@ namespace MiniAudioEx.Native
         }
 
         [DllImport(LIB_MINIAUDIO_EX, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe void ma_noise_uninit(ma_noise_ptr pNoise, ma_allocation_callbacks* pAllocationCallbacks);
+        internal static extern unsafe void ma_noise_uninit(ma_noise_ptr pNoise, ma_allocation_callbacks* pAllocationCallbacks);
 
         /// <summary>
         /// Uninitializes a noise generator with custom allocation callbacks.

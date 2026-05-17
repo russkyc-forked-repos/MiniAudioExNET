@@ -671,8 +671,8 @@ namespace MiniAudioEx.Native
     }
 
     /// <summary>
-    /// Allocation type identifiers used by miniaudio's internal memory tracking.
-    /// Each value corresponds to a specific data structure or object type that
+    /// Allocation type identifiers.
+    /// Each value corresponds to a specific 'ma' data structure or object type that
     /// miniaudio allocates internally.
     /// </summary>
     public enum ma_allocation_type
