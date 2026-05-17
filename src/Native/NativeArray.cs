@@ -50,12 +50,23 @@ using System;
 
 namespace MiniAudioEx.Native
 {
+    /// <summary>
+    /// Provides a view over a contiguous block of native memory as a typed, indexable span.
+    /// This is a <c>ref struct</c> that cannot be allocated on the managed heap and is intended
+    /// for short-lived access to native arrays returned by miniaudio interop functions.
+    /// </summary>
+    /// <typeparam name="T">The unmanaged type of elements stored in the native array.</typeparam>
     public unsafe ref struct NativeArray<T> where T : unmanaged
     {
+        /// <summary>
+        /// A native pointer to the first element of the array. The caller is responsible for
+        /// ensuring the memory remains valid during the lifetime of this wrapper.
+        /// </summary>
         internal void* _pointer;
         /// <summary>The number of elements this NativeArray contains.</summary>
         private readonly int _length;
 
+        /// <summary>Gets the number of elements in this <see cref="NativeArray{T}"/>.</summary>
         public int Length
         {
             get
@@ -64,6 +75,7 @@ namespace MiniAudioEx.Native
             }
         }
 
+        /// <summary>Gets a value indicating whether this <see cref="NativeArray{T}"/> is empty.</summary>
         public bool IsEmpty
         {
             get
@@ -72,6 +84,7 @@ namespace MiniAudioEx.Native
             }
         }
 
+        /// <summary>Gets an <see cref="IntPtr"/> pointing to the first element of the array.</summary>
         public IntPtr Pointer
         {
             get
@@ -80,6 +93,9 @@ namespace MiniAudioEx.Native
             }
         }
 
+        /// <summary>Gets a reference to the element at the specified index.</summary>
+        /// <param name="index">The zero-based index of the element to get.</param>
+        /// <returns>A reference to the element at the specified index.</returns>
         public ref T this[int index]
         {
             [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -91,6 +107,9 @@ namespace MiniAudioEx.Native
             }
         }
 
+        /// <summary>Initializes a new instance of the <see cref="NativeArray{T}"/> struct from a native pointer.</summary>
+        /// <param name="pointer">A pointer to the first element of the array.</param>
+        /// <param name="length">The number of elements in the array.</param>
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         public NativeArray(void* pointer, int length)
         {
@@ -98,6 +117,9 @@ namespace MiniAudioEx.Native
             _length = length;
         }
 
+        /// <summary>Initializes a new instance of the <see cref="NativeArray{T}"/> struct from an <see cref="IntPtr"/>.</summary>
+        /// <param name="pointer">An <see cref="IntPtr"/> pointing to the first element of the array.</param>
+        /// <param name="length">The number of elements in the array.</param>
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         public NativeArray(System.IntPtr pointer, int length)
         {
@@ -105,6 +127,9 @@ namespace MiniAudioEx.Native
             _length = length;
         }
 
+        /// <summary>Copies the contents of this <see cref="NativeArray{T}"/> to the specified destination array.</summary>
+        /// <param name="destination">The destination <see cref="NativeArray{T}"/> to copy the elements to.</param>
+        /// <exception cref="ArgumentException">Thrown when the destination array is shorter than this array.</exception>
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         public void CopyTo(NativeArray<T> destination)
         {
