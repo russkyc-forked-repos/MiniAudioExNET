@@ -393,8 +393,8 @@ namespace MiniAudioExExample
 ```
 
 # Demo Applications
-[MiniAudioPlayer](https://github.com/japajoe/MiniAudioPlayer)
-[MiniAudioRecorder](https://github.com/japajoe/MiniAudioRecorder)
+- [MiniAudioPlayer](https://github.com/japajoe/MiniAudioPlayer)
+- [MiniAudioRecorder](https://github.com/japajoe/MiniAudioRecorder)
 
 # More examples
 
