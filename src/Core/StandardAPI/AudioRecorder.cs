@@ -144,7 +144,7 @@ namespace MiniAudioEx.Core.StandardAPI
             context.Free();
         }
 
-        protected bool Initialize()
+        public bool Initialize()
         {
             if(context.pointer == IntPtr.Zero)
             {
@@ -177,8 +177,6 @@ namespace MiniAudioEx.Core.StandardAPI
                 if(result != ma_result.success)
                 {
                     Console.WriteLine("Failed to initialize device: " + result);
-                    MiniAudioNative.ma_context_uninit(context);
-                    context.Free();
                     device.Free();
                     return false;
                 }
