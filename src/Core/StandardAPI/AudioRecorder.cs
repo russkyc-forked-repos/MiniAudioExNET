@@ -144,6 +144,10 @@ namespace MiniAudioEx.Core.StandardAPI
             context.Free();
         }
 
+        /// <summary>
+        /// Initializes the capture device. This will fail if no device has been set yet.
+        /// </summary>
+        /// <returns>True on success, false on failure.</returns>
         public bool Initialize()
         {
             if(context.pointer == IntPtr.Zero)
