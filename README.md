@@ -33,8 +33,13 @@ If you find something is missing from the API, please open an issue. This librar
 
 # Installation
 ```
-dotnet add package JAJ.Packages.MiniAudioEx --version 3.3.3
+dotnet add package JAJ.Packages.MiniAudioEx --version 3.3.4
 ```
+
+# Changes in 3.3.4
+- Implemented loading ogg from path with wide string.
+- Fix race condition in WaveFileStream.
+- More inline documentation for native API.
 
 # Changes in 3.3.3
 - Added platform iOS ARM64.
