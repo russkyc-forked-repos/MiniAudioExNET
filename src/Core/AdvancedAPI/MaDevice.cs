@@ -139,5 +139,20 @@ namespace MiniAudioEx.Core.AdvancedAPI
 		{
 			return MiniAudioNative.ma_device_set_master_volume_db(handle, gainDB);
 		}
+
+		public ma_device_resampling_ptr GetResampling()
+		{
+			return MiniAudioNative.ma_device_get_resampling(handle);
+		}
+
+		public ma_device_playback_ptr GetPlayback()
+		{
+			return MiniAudioNative.ma_device_get_playback(handle);
+		}
+		
+		public ma_device_capture_ptr GetCapture()
+		{
+			return MiniAudioNative.ma_device_get_capture(handle);
+		}
 	}
 }
