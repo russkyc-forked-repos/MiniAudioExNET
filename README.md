@@ -22,6 +22,7 @@ If you find something is missing from the API, please open an issue. This librar
 # Platforms
 - Windows x86_64
 - Windows x86
+- Windows ARM64
 - Linux x86_64
 - Linux ARM64
 - Linux ARM32
@@ -33,8 +34,11 @@ If you find something is missing from the API, please open an issue. This librar
 
 # Installation
 ```
-dotnet add package JAJ.Packages.MiniAudioEx --version 3.3.4
+dotnet add package JAJ.Packages.MiniAudioEx --version 3.3.5
 ```
+
+# Changes in 3.3.5
+- Added platform Windows ARM64.
 
 # Changes in 3.3.4
 - Implemented loading ogg from path with wide string.
