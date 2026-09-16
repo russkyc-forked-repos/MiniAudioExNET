@@ -34,8 +34,11 @@ If you find something is missing from the API, please open an issue. This librar
 
 # Installation
 ```
-dotnet add package JAJ.Packages.MiniAudioEx --version 3.3.6
+dotnet add package JAJ.Packages.MiniAudioEx --version 3.3.7
 ```
+
+# Changes in 3.3.7
+- Thread-safe stopping of `AudioApp`.
 
 # Changes in 3.3.6
 - Added `BusLimiterEffect`.

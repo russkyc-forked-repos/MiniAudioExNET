@@ -63,6 +63,7 @@ namespace MiniAudioEx.Core.StandardAPI
 
         private UInt32 sampleRate;
         private UInt32 channels;
+        private volatile bool isRunning;
 
         public AudioApp(UInt32 sampleRate, UInt32 channels)
         {
@@ -73,23 +74,32 @@ namespace MiniAudioEx.Core.StandardAPI
         public void Run()
         {
             Console.CancelKeyPress += OnExit;
+            isRunning = true;
 
             AudioContext.Initialize(sampleRate, channels, 2048);
 
             Loaded?.Invoke();
 
-            while(true)
+            while(isRunning)
             {
                 AudioContext.Update();
                 Update?.Invoke(AudioContext.DeltaTime);
                 Thread.Sleep(10);
             }
+
+            Closing?.Invoke();
+            AudioContext.Deinitialize();
+            Console.CancelKeyPress -= OnExit;
+        }
+
+        public void Close()
+        {
+            isRunning = false;
         }
 
         private void OnExit(object sender, ConsoleCancelEventArgs e)
         {
-            Closing?.Invoke();
-            AudioContext.Deinitialize();
+            Close();
         }
     }
 }
